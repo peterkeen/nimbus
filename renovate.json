@@ -11,5 +11,5 @@
   },
   kubernetes: {
     managerFilePatterns: ["/\\.yaml(?:\\.j2)?$/"],
-  },
+  }
 }
