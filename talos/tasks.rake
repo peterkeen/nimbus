@@ -15,7 +15,7 @@ task :setup do
     sh "talosctl config remove nimbus -y"
     sh "talosctl config merge clusterconfig/talosconfig"
     sh "talosctl config use-context nimbus"
-    sh "talosctl kubeconfig clusterconfig/kubeconfig"
+    sh "talosctl kubeconfig clusterconfig/kubeconfig --force"
   end
 end
 
