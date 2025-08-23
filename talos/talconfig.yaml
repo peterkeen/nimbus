@@ -1,0 +1,59 @@
+---
+clusterName: nimbus
+talosVersion: 1.10.6
+kubernetesVersion: 1.33.4
+endpoint: https://10.73.95.195:6443
+domain: nimbus.keen.land
+allowSchedulingOnControlPlanes: true
+patches:
+  - |-
+    machine:
+      network:
+        kubespan:
+          enabled: true
+          advertiseKubernetesNetworks: true
+      kubelet:
+        extraArgs:
+          rotate-server-certificates: true
+      features:
+        hostDNS:
+          resolveMemberNames: true
+
+  - |-
+    cluster:
+      discovery:
+        enabled: true
+        registries:
+          kubernetes:
+            disabled: true
+          service: {}
+
+controlPlane:
+  patches:
+    - |-
+      machine:
+        features:
+          kubernetesTalosAPIAccess:
+            enabled: true
+            allowedRoles:
+              - os:reader
+              - os:etcd:backup
+            allowedKubernetesNamespaces:
+              - kube-system
+  schematic:
+    customization:
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/qemu-guest-agent
+          - siderolabs/iscsi-tools
+          - siderolabs/util-linux-tools
+
+nodes:
+  - hostname: nimbus
+    ipAddress: 10.73.95.195
+    installDisk: /dev/sda
+    controlPlane: true
+    networkInterfaces:
+      - interface: eth0
+        dhcp: true
+

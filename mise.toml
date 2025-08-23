@@ -3,7 +3,11 @@
 _.file = ".env"
 
 [tools]
+helm = "latest"
+helm-diff = "latest"
+helmfile = "latest"
 k9s = "latest"
 kubectl = "latest"
+talhelper = "latest"
 talosctl = "latest"
-"ubi:cozystack/talm" = "latest"
+yq = "latest"
