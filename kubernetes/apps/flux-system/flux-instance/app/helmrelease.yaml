@@ -36,6 +36,7 @@ spec:
         # renovate: datasource=github-releases depName=controlplaneio-fluxcd/distribution
         version: 2.6.4
       cluster:
+        domain: "nimbus.keen.land"
         networkPolicy: false
       components:
         - source-controller
