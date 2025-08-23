@@ -1,5 +1,7 @@
 require './lib/task_common.rb'
 
+ENV['PAGER'] = nil
+
 ENV['KUBECONFIG'] = File.join(Dir.pwd, "talos/clusterconfig/kubeconfig")
 
 if File.exist?(File.expand_path("~/.env"))
