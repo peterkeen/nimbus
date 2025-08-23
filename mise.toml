@@ -1,0 +1,9 @@
+
+[env]
+_.file = ".env"
+
+[tools]
+k9s = "latest"
+kubectl = "latest"
+talosctl = "latest"
+"ubi:cozystack/talm" = "latest"
