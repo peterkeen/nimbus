@@ -21,6 +21,11 @@ patches:
 
   - |-
     cluster:
+      network:
+        podSubnets:
+          - 10.245.0.0/16
+        serviceSubnets:
+          - 10.97.0.0/12
       discovery:
         enabled: true
         registries:
@@ -56,4 +61,10 @@ nodes:
     networkInterfaces:
       - interface: eth0
         dhcp: true
-
+    userVolumes:
+      - name: local-path-provisioner-3
+        provisioning:
+          diskSelector:
+            match: disk.transport == "virtio"
+          minSize: 10GiB
+          grow: true

@@ -5,3 +5,4 @@ namespace: kube-system
 resources:
   - ./spegel/ks.yaml
   - ./metrics-server/ks.yaml
+  - ./local-path-provisioner/ks.yaml

@@ -15,7 +15,7 @@ task :setup do
     sh "talosctl config remove nimbus -y"
     sh "talosctl config merge clusterconfig/talosconfig"
     sh "talosctl config use-context nimbus"
-    sh "talosctl kubeconfig clusterconfig/kubeconfig --force"
+    sh "talosctl kubeconfig clusterconfig/kubeconfig --force" rescue nil
   end
 end
 
@@ -23,6 +23,10 @@ task :apply => :setup do
   cmd = %w[apply]
   if ENV["reboot"] == "true"
     cmd << '--extra-flags="--mode=reboot"'
+  end
+
+  if ENV["insecure"] == "true"
+    cmd << '--extra-flags="--insecure"'
   end
 
   talhelper_cmd(cmd.join(" "))
