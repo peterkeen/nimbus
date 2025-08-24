@@ -32,5 +32,6 @@ spec:
       retries: 3
   values:
     nodePathMap:
-      paths:
-        - /var/mnt/local-path-provisioner-3
+      - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
+        paths:
+          - /var/mnt/local-path-provisioner-3
