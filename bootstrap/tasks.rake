@@ -1,7 +1,7 @@
 task :apply_crds => "talos:setup" do
   filepath = File.join(Dir.pwd, "bootstrap/crds/helmfile.yaml")
   sh %Q{helmfile --file "#{filepath}" template --include-crds --no-hooks --quiet | yq ea --exit-status 'select(.kind == "CustomResourceDefinition")' - > /tmp/rendered_crds.yaml}
-  sh "kubectl apply --server-side --filename /tmp/rendered_crds.yaml" 
+  sh "kubectl apply --server-side --filename /tmp/rendered_crds.yaml"  rescue nil
 end
 
 task :apply_namespaces => "talos:setup" do

@@ -2,7 +2,7 @@
 clusterName: nimbus
 talosVersion: 1.10.6
 kubernetesVersion: 1.33.4
-endpoint: https://10.73.95.195:6443
+endpoint: https://10.73.95.193:6443
 domain: nimbus.keen.land
 allowSchedulingOnControlPlanes: true
 patches:
@@ -55,12 +55,17 @@ controlPlane:
 
 nodes:
   - hostname: nimbus
-    ipAddress: 10.73.95.195
+    ipAddress: 10.73.95.193
     installDisk: /dev/sda
     controlPlane: true
     networkInterfaces:
       - interface: eth0
-        dhcp: true
+        addresses:
+          - 10.73.95.193/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 10.73.95.1
+            metric: 1024
     userVolumes:
       - name: local-path-provisioner-3
         provisioning:

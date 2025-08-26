@@ -1,9 +1,5 @@
 require './lib/task_common.rb'
 
-ENV['PAGER'] = nil
-
-ENV['KUBECONFIG'] = File.join(Dir.pwd, "talos/clusterconfig/kubeconfig")
-
 if File.exist?(File.expand_path("~/.env"))
   vars = File.read(File.expand_path("~/.env"))
   vars.split("\n").each do |var|
@@ -36,4 +32,8 @@ end
 
 task :brew do
   sh "brew bundle"
+end
+
+task :k9s => "talos:setup" do
+  exec "k9s"
 end

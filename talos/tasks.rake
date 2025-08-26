@@ -9,12 +9,6 @@ task :setup do
 
     sh "op document get --vault fmycvdzmeyvbndk7s7pjyrebtq 53dgrve5ahxxehmt5q3u5jirpm > clusterconfig/talsecret.yaml"
     sh "talhelper genconfig --secret-file clusterconfig/talsecret.yaml --no-gitignore"
-    sh "talosctl config add dummy"
-    sh "talosctl config add nimbus"
-    sh "talosctl config use-context dummy"
-    sh "talosctl config remove nimbus -y"
-    sh "talosctl config merge clusterconfig/talosconfig"
-    sh "talosctl config use-context nimbus"
     sh "talosctl kubeconfig clusterconfig/kubeconfig --force" rescue nil
   end
 end

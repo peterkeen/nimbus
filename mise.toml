@@ -1,6 +1,9 @@
 
 [env]
 _.file = ".env"
+PAGER = ""
+KUBECONFIG = "{{config_root}}/talos/clusterconfig/kubeconfig"
+TALOSCONFIG = "{{config_root}}/talos/clusterconfig/talosconfig"
 
 [tools]
 helm = "latest"
