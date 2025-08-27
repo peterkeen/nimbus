@@ -45,4 +45,4 @@ spec:
       hostPort:
         enabled: true
       publishService:
-        enabled: false
+        enabled: true
