@@ -42,6 +42,7 @@ spec:
     controller:
       kind: DaemonSet
       reportNodeInternalIp: true
+      publishStatusAddress: 10.73.95.193
       hostNetwork: true
       hostPort:
         enabled: true
