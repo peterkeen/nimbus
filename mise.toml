@@ -6,6 +6,7 @@ KUBECONFIG = "{{config_root}}/talos/clusterconfig/kubeconfig"
 TALOSCONFIG = "{{config_root}}/talos/clusterconfig/talosconfig"
 
 [tools]
+flux2 = "latest"
 helm = "latest"
 helm-diff = "latest"
 helmfile = "latest"
