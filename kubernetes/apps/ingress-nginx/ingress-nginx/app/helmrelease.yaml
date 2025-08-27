@@ -40,7 +40,9 @@ spec:
       retries: 3
   values:
     controller:
+      kind: DaemonSet
+      reportNodeInternalIp: true
       hostPort:
         enabled: true
       publishService:
-        enabled: true
+        enabled: false
