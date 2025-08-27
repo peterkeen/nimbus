@@ -9,10 +9,18 @@ Foundational components:
 - Talos
 - talhelper
 - flux-operator
-- external-secrets using the 1Password SDK provider
+- 1password operator
 - metrics-server
-- spegel
 
 Bootstrapping is managed with Rake.
+
+## Bootstrapping
+
+```
+$ rake talos:apply
+$ talosctl bootstrap -n 10.73.95.139
+$ kubectl get csr && kubectl certificate approve <node csr>
+$ rake bootstrap:apply
+```
 
 License: MIT
