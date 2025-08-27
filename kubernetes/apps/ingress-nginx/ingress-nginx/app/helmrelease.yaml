@@ -41,10 +41,11 @@ spec:
   values:
     controller:
       kind: DaemonSet
-      reportNodeInternalIp: true
-      publishStatusAddress: 10.73.95.193
-      hostNetwork: true
       hostPort:
         enabled: true
+      reportNodeInternalIp: true
+      labels:
+        pod-security.kubernetes.io/enforce: privileged
+        pod-security.kubernetes.io/enforce-version: latest
       publishService:
         enabled: false
