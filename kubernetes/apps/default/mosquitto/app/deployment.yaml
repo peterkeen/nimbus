@@ -30,7 +30,9 @@ spec:
           imagePullPolicy: "IfNotPresent"
           volumeMounts:
             - name: mosquitto
-              mountPath: /mosquitto
+              mountPath: /mosquitto/data
+            - name: mosquitto-config
+              mountPath: /mosquitto/config
           env:
             - name: TZ
               value: America/Detroit
