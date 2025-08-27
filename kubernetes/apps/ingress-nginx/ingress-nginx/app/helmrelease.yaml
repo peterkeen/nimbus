@@ -42,7 +42,8 @@ spec:
     controller:
       kind: DaemonSet
       reportNodeInternalIp: true
+      hostNetwork: true
       hostPort:
         enabled: true
       publishService:
-        enabled: true
+        enabled: false
