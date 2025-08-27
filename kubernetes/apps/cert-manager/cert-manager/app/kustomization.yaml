@@ -6,3 +6,4 @@ resources:
   - ./externalsecret.yaml
   - ./clusterissuer.yaml
   - ./helmrelease.yaml
+  - ./wildcard_cert.yaml
