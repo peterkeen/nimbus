@@ -4,3 +4,4 @@ namespace: ingress-nginx
 
 resources:
   - ./namespace.yaml
+  - ./ingress-nginx/ks.yaml
