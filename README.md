@@ -18,7 +18,7 @@ Bootstrapping is managed with Rake.
 
 ```
 $ rake talos:apply
-$ talosctl bootstrap -n 10.73.95.139
+$ talosctl bootstrap -n nimbus
 $ kubectl get csr && kubectl certificate approve <node csr>
 $ rake bootstrap:apply
 ```
