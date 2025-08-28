@@ -49,7 +49,7 @@ spec:
         ref: refs/heads/main
         path: kubernetes/flux/cluster
         secretRef:
-          name: infra-git-ssh-key
+          name: infra-git-ssh-identity
         interval: 1m
       commonMetadata:
         labels:

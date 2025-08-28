@@ -5,11 +5,3 @@ metadata:
   namespace: kube-system
 stringData:
   token: "op://fmycvdzmeyvbndk7s7pjyrebtq/6du6flhckckwymlzin3hu2oroy/credential"
----
-apiVersion: onepassword.com/v1
-kind: OnePasswordItem
-metadata:
-  name: infra-git-ssh-key
-  namespace: flux-system
-spec:
-  itemPath: "vaults/fmycvdzmeyvbndk7s7pjyrebtq/items/oyuoc5zehrapvlcw5ryvlyk65e"
