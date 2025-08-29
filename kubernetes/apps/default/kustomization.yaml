@@ -3,4 +3,5 @@ kind: Kustomization
 namespace: default
 
 resources:
+  - ../_common/ghcr.yaml
   - ./mosquitto/ks.yaml
