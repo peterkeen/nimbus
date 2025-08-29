@@ -1,0 +1,69 @@
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: waterfurnace-restart
+  namespace: default
+---
+# allow getting status and patching only the one deployment you want
+# to restart
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: waterfurnace-restart
+  namespace: default
+rules:
+  - apiGroups: ["apps", "extensions"]
+    resources: ["deployments"]
+    resourceNames: ["waterfurnace"]
+    verbs: ["get", "patch", "list", "watch"] # "list" and "watch" are only needed
+                                             # if you want to use `rollout status`
+---
+# bind the role to the service account
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: waterfurnace-restart
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: waterfurnace-restart
+subjects:
+  - kind: ServiceAccount
+    name: waterfurnace-restart
+    namespace: default
+---
+# cron to actually do the restart
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: waterfurnace-restart
+  namespace: default
+spec:
+  concurrencyPolicy: Forbid
+  schedule: '0 10 * * *' # cron spec of time, here, 8 o'clock
+  jobTemplate:
+    spec:
+      backoffLimit: 2 # this has very low chance of failing, as all this does
+                      # is prompt kubernetes to schedule new replica set for
+                      # the deployment
+      activeDeadlineSeconds: 600 # timeout, makes most sense with
+                                 # "waiting for rollout" variant specified below
+      template:
+        spec:
+          serviceAccountName: waterfurnace-restart # name of the service
+                                                   # account configured above
+          restartPolicy: Never
+          containers:
+            - name: kubectl
+              image: registry.suse.com/suse/kubectl 
+              resources:
+                requests:
+                  memory: "64Mi"
+                limits:
+                  memory: "64Mi"
+              command:
+                - 'kubectl'
+                - 'rollout'
+                - 'restart'
+                - 'deployment/waterfurnace'
