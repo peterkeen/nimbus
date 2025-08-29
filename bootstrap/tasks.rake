@@ -26,9 +26,7 @@ task :apply_git_secret => :apply_namespaces do
     sh "op read 'op://fmycvdzmeyvbndk7s7pjyrebtq/lx4kcymgkkukpwes5vxhsczjcm/private key' > #{dir}/identity"
     sh "op read 'op://fmycvdzmeyvbndk7s7pjyrebtq/lx4kcymgkkukpwes5vxhsczjcm/known_hosts' > #{dir}/known_hosts"
 
-    unless sh "kubectl get secret -n flux-system infra-git-ssh-identity >/dev/null 2>&1"
-      sh "kubectl create -n flux-system secret generic infra-git-ssh-identity --type=string --from-file=identity=#{dir}/identity --from-file=known_hosts=#{dir}/known_hosts"
-    end
+    sh "kubectl get secret -n flux-system infra-git-ssh-identity >/dev/null 2>&1 || kubectl create -n flux-system secret generic infra-git-ssh-identity --type=string --from-file=identity=#{dir}/identity --from-file=known_hosts=#{dir}/known_hosts"
   end
 end
 

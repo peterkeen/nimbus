@@ -45,11 +45,9 @@ spec:
         - notification-controller
       sync:
         kind: GitRepository
-        url: ssh://git@infra-git.keen.land:22/nimbus.git
+        url: http://10.73.95.46:23232/nimbus.git
         ref: refs/heads/main
         path: kubernetes/flux/cluster
-        secretRef:
-          name: infra-git-ssh-identity
         interval: 1m
       commonMetadata:
         labels:
