@@ -24,8 +24,6 @@ spec:
             }
           ]
     spec:
-      nodeSelector:
-        topology.kubernetes.io/zone: home-1
       volumes:
         - name: homeassistant-configs
           persistentVolumeClaim:
