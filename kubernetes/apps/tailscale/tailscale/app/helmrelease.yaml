@@ -11,7 +11,7 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmChart
 metadata:
-  name: tailscale
+  name: tailscale-operator
 spec:
   interval: 5m0s
   chart: metallb
