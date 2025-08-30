@@ -1,0 +1,83 @@
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: zigbee-house-config-pvc
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zigbee-house
+  labels:
+    app: zigbee-house
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: zigbee-house
+  template:
+    metadata:
+      labels:
+        app: zigbee-house
+    spec:
+      volumes:
+        - name: zigbee-house-config
+          persistentVolumeClaim:
+            claimName: zigbee-house-config-pvc
+      containers:
+        - name: zigbee-house
+          image: ghcr.io/koenkk/zigbee2mqtt:2.6.0
+          imagePullPolicy: "IfNotPresent"
+          volumeMounts:
+            - name: zigbee-house-config
+              mountPath: /app/data
+          resources:
+            requests:
+              memory: "128Mi"
+            limits:
+              memory: "128Mi"              
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zigbee-house
+spec:
+  selector:
+    app: zigbee-house
+  ports:
+    - protocol: TCP
+      port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: zigbee-house
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - zigbee-house.keen.land
+      secretName: keenland-zigbee-house-ingress-cert
+  rules:
+    - host: zigbee-house.keen.land
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: zigbee-house
+                port:
+                  number: 8080
