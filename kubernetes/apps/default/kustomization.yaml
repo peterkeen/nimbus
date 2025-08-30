@@ -4,5 +4,3 @@ namespace: default
 
 resources:
   - ./ghcr.yaml
-  - ./mosquitto/ks.yaml
-  - ./home-assistant/ks.yaml
