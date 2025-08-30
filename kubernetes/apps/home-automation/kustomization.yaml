@@ -7,3 +7,4 @@ resources:
   - ./ghcr.yaml
   - ./mosquitto/ks.yaml
   - ./home-assistant/ks.yaml
+  - ./zigbee-house/ks.yaml
