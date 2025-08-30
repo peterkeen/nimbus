@@ -49,3 +49,5 @@ spec:
         pod-security.kubernetes.io/enforce-version: latest
       publishService:
         enabled: false
+      extraArgs:
+        default-ssl-certificate: cert-manager/wildcard-prod
