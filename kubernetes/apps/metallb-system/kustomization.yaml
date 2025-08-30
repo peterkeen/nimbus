@@ -4,5 +4,5 @@ namespace: metallb-system
 
 resources:
   - ./namespace.yaml
-#  - ./metallb/ks.yaml
+  - ./metallb/ks.yaml
 
