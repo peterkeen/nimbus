@@ -4,5 +4,5 @@ namespace: tailscale
 
 resources:
   - ./namespace.yaml
-  - ./tailscale/ks.yaml
+#  - ./tailscale/ks.yaml
 
