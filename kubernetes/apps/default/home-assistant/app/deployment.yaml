@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homeassistant
+  labels:
+    app: homeassistant
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: homeassistant
+  template:
+    metadata:
+      labels:
+        app: homeassistant
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |
+          [
+            {
+              "name": "hass-macvlan-static",
+              "ips": ["10.73.95.4/24"]
+            }
+          ]
+    spec:
+      nodeSelector:
+        topology.kubernetes.io/zone: home-1
+      volumes:
+        - name: homeassistant-configs
+          persistentVolumeClaim:
+            claimName: homeassistant-configs-pvc
+        - name: backups-nfs
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/backups/home-assistant
+      containers:
+        - name: homeassistant
+          image: "ghcr.io/home-assistant/home-assistant:2025.8.3"
+          imagePullPolicy: "IfNotPresent"
+          volumeMounts:
+            - name: homeassistant-configs
+              mountPath: /config
+            - name: backups-nfs
+              mountPath: /config/backups
+          env:
+            - name: TZ
+              value: America/Detroit
+          resources:
+            requests:
+              memory: '8Gi'
+            limits:
+              memory: '8Gi'
