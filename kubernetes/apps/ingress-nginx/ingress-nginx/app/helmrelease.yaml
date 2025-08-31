@@ -50,4 +50,4 @@ spec:
       publishService:
         enabled: false
       extraArgs:
-        default-ssl-certificate: cert-manager/wildcard-prod
+        default-ssl-certificate: cert-manager/keenland-wildcard-cert
