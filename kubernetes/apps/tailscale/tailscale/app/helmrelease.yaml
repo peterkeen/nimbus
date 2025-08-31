@@ -32,8 +32,8 @@ spec:
     kind: HelmChart
     name: tailscale-operator
   install:
-    retries:
-      remediation: -1
+    remediation:
+      retries: -1
   upgrade:
     cleanupOnFail: true
     remediation:
