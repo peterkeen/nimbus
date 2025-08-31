@@ -14,7 +14,7 @@ metadata:
   name: tailscale-operator
 spec:
   interval: 5m0s
-  chart: metallb
+  chart: tailscale-operator
   reconcileStrategy: ChartVersion
   sourceRef:
     kind: HelmRepository
