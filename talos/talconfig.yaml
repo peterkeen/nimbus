@@ -2,7 +2,7 @@
 clusterName: nimbus
 talosVersion: 1.10.6
 kubernetesVersion: 1.33.4
-endpoint: https://10.73.95.193:6443
+endpoint: https://10.73.95.73:6443
 domain: nimbus.keen.land
 allowSchedulingOnControlPlanes: true
 patches:
@@ -50,18 +50,19 @@ controlPlane:
       systemExtensions:
         officialExtensions:
           - siderolabs/qemu-guest-agent
+          - siderolabs/i915
           - siderolabs/iscsi-tools
           - siderolabs/util-linux-tools
 
 nodes:
   - hostname: nimbus
-    ipAddress: 10.73.95.193
+    ipAddress: 10.73.95.73
     installDisk: /dev/sda
     controlPlane: true
     networkInterfaces:
       - interface: eth0
         addresses:
-          - 10.73.95.193/24
+          - 10.73.95.73/24
         routes:
           - network: 0.0.0.0/0
             gateway: 10.73.95.1

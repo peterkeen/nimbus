@@ -5,3 +5,4 @@ metadata:
   namespace: kube-system
 stringData:
   token: "op://fmycvdzmeyvbndk7s7pjyrebtq/6du6flhckckwymlzin3hu2oroy/credential"
+
