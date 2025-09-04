@@ -1,0 +1,17 @@
+
+[env]
+_.file = ".env"
+PAGER = ""
+KUBECONFIG = "{{config_root}}/talos/clusterconfig/kubeconfig"
+TALOSCONFIG = "{{config_root}}/talos/clusterconfig/talosconfig"
+
+[tools]
+flux2 = "v2.6.4"
+helm = "v3.18.6"
+helm-diff = "v3.12.5"
+helmfile = "v1.1.6"
+k9s = "v0.50.9"
+kubectl = "v1.34.0"
+talhelper = "v3.0.34"
+talosctl = "v1.11.0"
+yq = "v4.47.1"
