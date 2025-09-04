@@ -19,3 +19,21 @@ spec:
       kind: GitRepository
       name: flux-system
       namespace: flux-system
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nimbus-flux-webhook
+  tailscale.com/hostname: nimbus-flux-webhook
+  annotations:
+    tailscale.com/proxy-group: ingress-proxies
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http-webhook
+  selector:
+    app: notification-controller
+  type: LoadBalancer
+  loadBalancerClass: tailscale
