@@ -1,0 +1,11 @@
+---
+apiVersion: tailscale.com/v1alpha1
+kind: Connector
+metadata:
+  name: nimbus-cidrs
+spec:
+  hostname: nimbus-cidrs
+  subnetRouter:
+    advertiseRoutes:
+      - "10.97.0.0/16"
+      - "10.245.0.0/16"
