@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - ./secret.yaml
   - ./helmrelease.yaml
-#  - ./dns.yaml
-#  - ./ingress-proxy-group.yaml
-#  - ./subnet-router.yaml
+  - ./dns.yaml
+  - ./ingress-proxy-group.yaml
+  - ./subnet-router.yaml
