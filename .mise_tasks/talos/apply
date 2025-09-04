@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -e
+
+cd $MISE_PROJECT_ROOT/talos
+
+#MISE description="Apply talhelper config"
+#MISE depends=["talos:setup"]
+#USAGE flag "-i --insecure" help="ignore insecure certificates"
+#USAGE flag "-r --reboot" help="apply with reboot"
+
+command="apply"
+
+if [ "$usage_reboot" == "true" ]; then
+    command="${command} --extra-flags='--mode=reboot'"
+fi
+
+if [ "$usage_insecure" == "true" ]; then
+    command="${command} --extra-flags='--insecure'"
+fi
+
+generated=$(talhelper gencommand $command)
+echo $generated
+eval $generated

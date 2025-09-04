@@ -1,0 +1,85 @@
+---
+clusterName: nimbus
+talosVersion: 1.11.0
+kubernetesVersion: 1.34.0
+domain: nimbus.keen.land
+allowSchedulingOnControlPlanes: true
+endpoint: https://10.73.95.212:6443
+
+patches:
+  - |-
+    machine:
+      network:
+        kubespan:
+          enabled: true
+      kubelet:
+        extraArgs:
+          rotate-server-certificates: true
+      features:
+        hostDNS:
+          enabled: true
+          forwardKubeDNSToHost: false
+          resolveMemberNames: true
+
+  - |-
+    cluster:
+      network:
+        cni:
+          name: none
+        podSubnets:
+          - 10.245.0.0/16
+        serviceSubnets:
+          - 10.97.0.0/16
+      proxy:
+        disabled: true
+      discovery:
+        enabled: true
+        registries:
+          kubernetes:
+            disabled: true
+          service: {}
+
+controlPlane:
+  schematic:
+    customization:
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/qemu-guest-agent
+          - siderolabs/i915
+          - siderolabs/util-linux-tools
+  patches:
+    - |-
+      machine:
+        features:
+          kubernetesTalosAPIAccess:
+            enabled: true
+            allowedRoles:
+              - os:reader
+              - os:etcd:backup
+            allowedKubernetesNamespaces:
+              - kube-system
+
+nodes:
+  - hostname: nimbus
+    ipAddress: 10.73.95.212
+    installDisk: /dev/sda
+    controlPlane: true
+    networkInterfaces:
+      - interface: eth0
+        addresses:
+          - 10.73.95.212/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 10.73.95.1
+            metric: 1024
+    volumes:
+      - name: EPHEMERAL
+        provisioning:
+          maxSize: 40GB
+    userVolumes:
+      - name: local-path-provisioner-3
+        provisioning:
+          diskSelector:
+            match: system_disk
+          minSize: 10GiB
+          grow: true

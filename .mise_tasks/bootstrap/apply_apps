@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+#MISE description="Apply kubernetes apps"
+
+bootstrap_dir="${MISE_PROJECT_ROOT}/bootstrap"
+
+if ! helmfile -f "${bootstrap_dir}/helmfile.d/01-apps.yaml" sync --debug; then \
+    echo "Failed to sync helmfile"
+    exit 1
+fi

@@ -1,0 +1,13 @@
+#!/bin/sh
+#MISE description="Set up talos config"
+
+set -e
+set -o pipefail
+
+talosroot=$(dirname $TALOSCONFIG)
+
+mkdir -p $talosroot
+
+op document get --vault fmycvdzmeyvbndk7s7pjyrebtq 53dgrve5ahxxehmt5q3u5jirpm > ${talosroot}/talsecret.yaml
+talhelper genconfig --config-file talos/talconfig.yaml --out-dir $talosroot --secret-file ${talosroot}/talsecret.yaml
+talosctl kubeconfig $talosroot/kubeconfig --force || true

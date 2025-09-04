@@ -15,5 +15,11 @@ kubectl = "v1.34.0"
 lefthook = "v1.12.3"
 talhelper = "v3.0.34"
 talosctl = "v1.11.0"
+usage = "latest"
 yamlfmt = "v0.17.2"
 yq = "v4.47.1"
+
+[task_config]
+includes = [
+  ".mise_tasks"
+]

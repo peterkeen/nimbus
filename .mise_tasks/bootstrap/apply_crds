@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+set -x
+
+bootstrap_dir="${MISE_PROJECT_ROOT}/bootstrap"
+
+if ! helmfile -f "${bootstrap_dir}/helmfile.d/00-crds.yaml" template -q | grep -v 'WARNING.*Helm' | kubectl apply --server-side -f -; then
+    echo "Failed to apply CRDs"
+    exit 1
+fi

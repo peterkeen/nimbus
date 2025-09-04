@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+#MISE description="bootstrap the talos etcd"
+#MISE depends=["talos:setup"]
+
+talosctl bootstrap -n 10.73.95.212

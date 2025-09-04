@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -e
+
+kubectl get csr -o json | jq -r '.items[] | if(.spec.groups | index("system:nodes")) then .metadata.name else "" end' | xargs kubectl certificate approve

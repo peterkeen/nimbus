@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -e
+
+#MISE description="Apply kubernetes namespaces"
+
+kubernetes_dir="${MISE_PROJECT_ROOT}/kubernetes"
+
+find "${kubernetes_dir}/apps" -mindepth 1 -maxdepth 1 -type d | while IFS= read -r ns; do
+    ns=$(basename $ns)
+    if ! kubectl create namespace "$ns" --dry-run=client -o yaml | kubectl apply --server-side -f -; then
+        echo "Failed to apply namespace" "stage" "$0" "namespace" "$ns";
+        exit 1
+    fi;
+done
