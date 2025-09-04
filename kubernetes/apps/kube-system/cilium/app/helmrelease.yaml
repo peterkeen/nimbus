@@ -19,13 +19,17 @@ spec:
   values:
     ipam:
       mode: kubernetes
-    kubeProxyReplacement: true
+    kubeProxyReplacement: true    
+    l2announcements:
+      enabled: true
     cgroup:
       autoMount:
         enabled: false
       hostRoot: /sys/fs/cgroup
     k8sServiceHost: localhost
     k8sServicePort: 7445
+    externalIPs:
+      enabled: true
     gatewayAPI:
       enabled: true
       enableAlpn: true
