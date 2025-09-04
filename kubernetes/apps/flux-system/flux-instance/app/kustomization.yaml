@@ -5,4 +5,4 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./ocirepository.yaml
-  - ./httproute.yaml
+  - ./webhook_receiver.yaml
