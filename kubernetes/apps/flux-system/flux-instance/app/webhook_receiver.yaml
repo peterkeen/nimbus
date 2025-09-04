@@ -33,3 +33,4 @@ spec:
   selector:
     app: notification-controller
   type: LoadBalancer
+  loadBalancerClass: io.cilium/l2-announcer
