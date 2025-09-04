@@ -3,10 +3,11 @@
 set -e
 
 #MISE description="Apply kubernetes apps"
+#MISE depends=["bootstrap:apply_resources"]
 
 bootstrap_dir="${MISE_PROJECT_ROOT}/bootstrap"
 
-if ! helmfile -f "${bootstrap_dir}/helmfile.d/01-apps.yaml" sync --debug; then \
+if ! op run --env-file="${bootstrap_dir}/helmfile.d/values.env" -- helmfile -f "${bootstrap_dir}/helmfile.d/01-apps.yaml.gotmpl" sync; then \
     echo "Failed to sync helmfile"
     exit 1
 fi

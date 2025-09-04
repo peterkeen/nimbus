@@ -1,0 +1,52 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: onepassword
+spec:
+  interval: 5m
+  url: https://1password.github.io/connect-helm-charts/
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmChart
+metadata:
+  name: connect
+spec:
+  interval: 5m0s
+  chart: connect
+  reconcileStrategy: ChartVersion
+  sourceRef:
+    kind: HelmRepository
+    name: onepassword
+  version: '2.0.3'
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: connect
+spec:
+  interval: 1h
+  chartRef:
+    kind: HelmChart
+    name: connect
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  valuesFrom:
+    - kind: Secret
+      name: onepassword-connect-token-keenland
+      valuesKey: token
+      targetPath: operator.serviceAccountToken.value
+  values:
+    operator:
+      create: true
+      authMethod: service-account
+    connect:
+      create: false
+

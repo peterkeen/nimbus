@@ -2,6 +2,8 @@
 set -e
 set -x
 
+#MISE depends=["bootstrap:apply_namespaces"]
+
 bootstrap_dir="${MISE_PROJECT_ROOT}/bootstrap"
 
 if ! helmfile -f "${bootstrap_dir}/helmfile.d/00-crds.yaml" template -q | grep -v 'WARNING.*Helm' | kubectl apply --server-side -f -; then

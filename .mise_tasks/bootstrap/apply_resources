@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+#MISE depends=["bootstrap:apply_crds"]
+
+bootstrap_dir=$MISE_PROJECT_ROOT/bootstrap
+op inject --in-file "${bootstrap_dir}/resources.yaml" | kubectl apply --server-side -f -

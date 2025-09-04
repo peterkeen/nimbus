@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -e
+
+#MISE description="Wait for a pending node CSR and approve it"
+
+get_pending_csrs() {
+    kubectl get csr -o json | jq -j -e -r '.items[] | if((.spec.groups | index("system:nodes")) and (.status == {})) then .metadata.name else null end | select(length > 0)'
+}
+
+while ! get_pending_csrs; do
+    sleep 1
+done
+
+get_pending_csrs | xargs kubectl certificate approve

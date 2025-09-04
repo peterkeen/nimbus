@@ -1,0 +1,32 @@
+---
+helmDefaults:
+  cleanupOnFail: true
+  wait: true
+  waitForJobs: true
+
+repositories:
+  - name: onepassword
+    url: https://1password.github.io/connect-helm-charts/  
+
+releases:
+  - name: cilium
+    namespace: kube-system
+    chart: oci://ghcr.io/home-operations/charts-mirror/cilium
+    version: 1.18.1
+    values:
+      - ./templates/values.yaml.gotmpl
+
+  - name: connect
+    namespace: kube-system
+    chart: onepassword/connect
+    needs: ['kube-system/cilium']    
+    setString:
+      - name: operator.serviceAccountToken.value
+        value: {{ requiredEnv "ONEPASSWORD_OPERATOR_SERVICE_ACCOUNT_TOKEN" }}
+    set:
+      - name: operator.create
+        value: true
+      - name: operator.authMethod
+        value: service-account
+      - name: connect.create
+        value: false

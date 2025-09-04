@@ -3,6 +3,7 @@
 set -e
 
 #MISE description="Apply kubernetes namespaces"
+#MISE depends=["talos:setup"]
 
 kubernetes_dir="${MISE_PROJECT_ROOT}/kubernetes"
 
