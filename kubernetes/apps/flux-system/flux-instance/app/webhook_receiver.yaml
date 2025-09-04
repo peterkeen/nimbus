@@ -27,6 +27,7 @@ metadata:
   annotations:
     tailscale.com/hostname: nimbus-flux-webhook
     tailscale.com/proxy-group: ingress-proxies
+    tailscale.com/tags: tag:server
 spec:
   ports:
     - name: http
