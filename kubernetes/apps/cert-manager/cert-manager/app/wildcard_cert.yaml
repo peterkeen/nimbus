@@ -1,0 +1,17 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-prod
+spec:
+  secretName: keenland-wildcard-cert
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: '*.keen.land'
+  dnsNames:
+    - "*.keen.land"
+    - "*.home.keen.land"
+    - "*.nimbus.keen.land"
+    - "*.omicron.keen.land"
+    - "*.ts.keen.land"
