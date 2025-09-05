@@ -16,7 +16,7 @@ if [ "$usage_reboot" == "true" ]; then
     reboot="--extra-flags='--mode=reboot'"
 fi
 
-if ! talos health --wait-timeout=0 >/dev/null 2>&1; then
+if ! talosctl health --wait-timeout=5s >/dev/null 2>&1; then
     insecure="--extra-flags='--insecure'"
 fi
 

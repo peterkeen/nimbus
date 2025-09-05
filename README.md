@@ -24,9 +24,15 @@ So far:
 3. Run `mise run talos:wait_for_node_csr`
 4. Run `mise run bootstrap`
 
+The bootstrapping process will
+
+1. bring the initial node online
+2. install an initial set of CRDs necessary for the next step
+2. install an initial set of applications: Cilium, 1Password, and Flux
+
 ## Webhook
 
-Bootstrap will create a `LoadBalancer` service `nimbus-flux-webhook` that points at `generic-receiver`.
+Bootstrap creates a `LoadBalancer` service `nimbus-flux-webhook` that points at `generic-receiver`.
 To generate the webhook URL, get the IP address from `nimbus-flux-webhook` and append the path found in the `generic-receiver` status:
 
 ```
@@ -39,3 +45,22 @@ flux-system   generic-receiver   12m   True    Receiver initialized for path: /h
 ```
 
 The resulting webhook URL is `http://<some ip>/hook/<some long path>`. Set this in the `soft-serve` git server sitting outside of the cluster.
+
+## Repository Structure
+
+Flux is initially configured in `kubernetes/apps/flux-system/flux-instance/helmrelease.yaml`.
+The `sync` value points at the git repo URL and the path within the repo to find the initial resources to load, `kubernetes/flux/cluster/ks.yaml`.
+
+That initial `ks.yaml` contains a `Kustomization` resource that points at `kubernetes/apps`.
+From there, Flux will search the top level directories for `kustomization.yaml` files.
+Each directory represents a kubernetes namespace.
+Within those namespaces are `kustomization.yaml` files that require `ks.yaml` files each defining a `Kustomization` resource.
+By convention each `Kustomization` points at path like `kubernetes/apps/<namespace>/<app_name>/app`.
+
+## Adding More Nodes
+
+To add more nodes, add them to `talos/talconfig.yaml` and run `mise run talos:apply`.
+
+## Upgrades
+
+TBD!
