@@ -22,4 +22,4 @@ So far:
 1. Boot a machine with a Talos ISO. The specfic version doesn't matter all that much.
 2. Update `talos/talconfig.yaml` with the specific machine information. IP, any necessary system extensions
 3. Run `mise run talos:wait_for_node_csr`
-4. Run `mise run bootstrap:apply`
+4. Run `mise run bootstrap`
