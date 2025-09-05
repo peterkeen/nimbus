@@ -23,3 +23,19 @@ So far:
 2. Update `talos/talconfig.yaml` with the specific machine information. IP, any necessary system extensions
 3. Run `mise run talos:wait_for_node_csr`
 4. Run `mise run bootstrap`
+
+## Webhook
+
+Bootstrap will create a `LoadBalancer` service `nimbus-flux-webhook` that points at `generic-receiver`.
+To generate the webhook URL, get the IP address from `nimbus-flux-webhook` and append the path found in the `generic-receiver` status:
+
+```
+$ kubectl get service nimbus-flux-webhook -n flux-system
+NAME                  TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+nimbus-flux-webhook   LoadBalancer   10.97.121.203   <some ip>     80:31371/TCP   13m
+$ kubectl get receiver generic-receiver -n flux-system
+NAMESPACE     NAME               AGE   READY   STATUS
+flux-system   generic-receiver   12m   True    Receiver initialized for path: /hook/<some long path>
+```
+
+The resulting webhook URL is `http://<some ip>/hook/<some long path>`. Set this in the `soft-serve` git server sitting outside of the cluster.
