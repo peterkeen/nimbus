@@ -10,6 +10,7 @@ flux2 = "v2.6.4"
 helm = "v3.18.6"
 helm-diff = "v3.12.5"
 helmfile = "v1.1.6"
+jq = "latest"
 k9s = "v0.50.9"
 kubectl = "v1.34.0"
 lefthook = "v1.12.3"
@@ -25,4 +26,5 @@ includes = [
 ]
 
 [tasks.bootstrap]
+description = "Run all post-talos bootstrap tasks"
 depends = ["bootstrap:apply_apps"]

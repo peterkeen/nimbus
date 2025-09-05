@@ -2,6 +2,7 @@
 
 set -e
 
+#MISE depends=["talos:bootstrap"]
 #MISE description="Wait for a pending node CSR and approve it"
 
 get_pending_csrs() {

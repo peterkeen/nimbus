@@ -2,6 +2,7 @@
 set -e
 set -x
 
+#MISE description="Apply CRDs required to bootstrap"
 #MISE depends=["bootstrap:apply_namespaces"]
 
 bootstrap_dir="${MISE_PROJECT_ROOT}/bootstrap"

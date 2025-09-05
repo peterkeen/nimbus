@@ -6,19 +6,18 @@ cd $MISE_PROJECT_ROOT/talos
 
 #MISE description="Apply talhelper config"
 #MISE depends=["talos:setup"]
-#USAGE flag "--insecure" help="ignore insecure certificates"
 #USAGE flag "--reboot" help="apply with reboot"
 
 command="apply"
-insecure=""
 reboot=""
+insecure=""
 
 if [ "$usage_reboot" == "true" ]; then
-    insecure="--extra-flags='--mode=reboot'"
+    reboot="--extra-flags='--mode=reboot'"
 fi
 
-if [ "$usage_insecure" == "true" ]; then
-    reboot="--extra-flags='--insecure'"
+if ! talos health --wait-timeout=0 >/dev/null 2>&1; then
+    insecure="--extra-flags='--insecure'"
 fi
 
 generated=$(talhelper gencommand $command $insecure $reboot)

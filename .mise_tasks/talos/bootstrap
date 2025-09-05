@@ -2,6 +2,9 @@
 set -e
 
 #MISE description="bootstrap the talos etcd"
-#MISE depends=["talos:setup"]
+#MISE depends=["talos:apply"]
+
+echo "Waiting 10 seconds for apply to complete"
+sleep 10
 
 talosctl bootstrap -n 10.73.95.212
