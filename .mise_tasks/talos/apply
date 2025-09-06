@@ -16,7 +16,9 @@ if [ "$usage_reboot" == "true" ]; then
     reboot="--extra-flags='--mode=reboot'"
 fi
 
-if ! talosctl health --wait-timeout=5s >/dev/null 2>&1; then
+cp_node=$(yq '.nodes[] | select(.controlPlane == true) | .hostname' talconfig.yaml)
+
+if ! talosctl health -n $cp_node --wait-timeout=5s >/dev/null 2>&1; then
     insecure="--extra-flags='--insecure'"
 fi
 

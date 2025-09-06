@@ -83,3 +83,41 @@ nodes:
             match: system_disk
           minSize: 10GiB
           grow: true
+
+  - hostname: nibbler
+    ipAddress: 10.73.95.74
+    installDisk: /dev/sda
+    controlPlane: false
+    kernelModules:
+      - name: nvidia
+      - name: nvidia_uvm
+      - name: nvidia_drm
+      - name: nvidia_modeset
+      - name: i915
+    networkInterfaces:
+      - interface: eth0
+        addresses:
+          - 10.73.95.74/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 10.73.95.1
+            metric: 1024
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/nonfree-kmod-nvidia-lts
+            - siderolabs/nvidia-container-toolkit-lts
+            - siderolabs/intel-ucode
+            - siderolabs/i915
+            - siderolabs/util-linux-tools
+            - siderolabs/iscsi-tools
+
+    userVolumes:
+      - name: data
+        provisioning:
+          diskSelector:
+            match: disk.transport == "virtio"
+          minSize: 200Gi
+          grow: true
+
