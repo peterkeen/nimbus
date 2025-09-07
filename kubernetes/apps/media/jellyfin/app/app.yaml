@@ -51,10 +51,6 @@ spec:
         - name: jellyfin-configs
           persistentVolumeClaim:
             claimName: jellyfin-configs-pvc
-        # - name: jellyfin-cache
-        #   nfs:
-        #     server: 10.73.95.84
-        #     path: /mnt/tank/media/jellyfin-cache
         - name: jellyfin-transcodes
           ephemeral:
             volumeClaimTemplate:
