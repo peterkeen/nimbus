@@ -55,34 +55,6 @@ spec:
       - name: freenas-iscsi-csi
 
     driver:
+      existingConfigSecret: morbo-democratic-csi-iscsi-config
       config:
         driver: freenas-api-iscsi
-        instance_id:
-        httpConnection:
-          protocol: http
-          host: 10.73.95.84
-          port: 80
-          allowInsecure: true
-        zfs:
-          datasetParentName: tank/k8s/iscsi
-          detachedSnapshotsDatasetParentName: tank/k8s/snaps
-        iscsi:
-          targetPortal: "10.73.95.84[:3260]"
-          interface:
-          namePrefix: csi-
-          nameSuffix: "-nimbus"
-          targetGroups:
-            - targetGroupPortalGroup: 1
-              targetGroupInitiatorGroup: 1
-              targetGroupAuthType: None
-          extentInsecureTpc: true
-          extentXenCompat: false
-          extentDisablePhysicalBlocksize: true
-          extentBlocksize: 512
-          extentRpm: "SSD"
-          extentAvailThreshold: 0
-  valuesFrom:
-    - kind: Secret
-      name: morbo-api-key
-      targetPath: "driver.config.driver.httpConnection"
-
