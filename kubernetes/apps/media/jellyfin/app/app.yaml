@@ -11,18 +11,6 @@ spec:
     requests:
       storage: 16Gi
 ---
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: jellyfin-cache-pvc
-spec:
-  storageClassName: morbo-versity
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -64,8 +52,9 @@ spec:
           persistentVolumeClaim:
             claimName: jellyfin-configs-pvc
         - name: jellyfin-cache
-          persistentVolumeClaim:
-            claimName: jellyfin-cache-pvc
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/media/jellyfin-cache
         - name: jellyfin-transcodes
           ephemeral:
             volumeClaimTemplate:
