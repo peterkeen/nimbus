@@ -1,0 +1,89 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: democratic-csi
+spec:
+  interval: 5m
+  url: https://democratic-csi.github.io/charts/
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmChart
+metadata:
+  name: democratic-csi
+spec:
+  interval: 5m0s
+  chart: democratic-csi
+  reconcileStrategy: ChartVersion
+  sourceRef:
+    kind: HelmRepository
+    name: democratic-csi
+  version: '0.15.0'
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: democratic-csi
+spec:
+  interval: 1h
+  chartRef:
+    kind: HelmChart
+    name: democratic-csi
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  # values:
+  #   csiDriver:
+  #     name: "org.democratic-csi.iscsi"
+  #   storageClasses:
+  #     - name: freenas-iscsi-csi
+  #       defaultClass: false
+  #       reclaimPolicy: Delete
+  #       volumeBindingMode: Immediate
+  #       allowVolumeExpansion: true
+  #       parameters:
+  #         fsType: ext4
+  #       mountOptions: []
+
+  #   volumeSnapshotClasses:
+  #     - name: freenas-iscsi-csi
+    
+  #   driver:
+  #     config:
+  #       driver: freenas-api-iscsi
+  #       instance_id:
+  #       httpConnection:
+  #         protocol: http
+  #         host: 10.73.95.84
+  #         port: 80
+  #         allowInsecure: true
+  #       zfs:
+  #         datasetParentName: tank/k8s/iscsi
+  #         detachedSnapshotsDatasetParentName: tank/k8s/snaps
+  #       iscsi:
+  #         targetPortal: "10.73.95.84[:3260]"
+  #         interface:
+  #         namePrefix: csi-
+  #         nameSuffix: "-nimbus"
+  #         targetGroups:
+  #           - targetGroupPortalGroup: 1
+  #             targetGroupInitiatorGroup: 1
+  #             targetGroupAuthType: None
+  #         extentInsecureTpc: true
+  #         extentXenCompat: false
+  #         extentDisablePhysicalBlocksize: true
+  #         extentBlocksize: 512
+  #         extentRpm: "SSD"
+  #         extentAvailThreshold: 0          
+  # valuesFrom:
+  #   - kind: Secret
+  #     name: morbo-api-key
+  #     valuesKey: apiKey
+  #     targetPath: "driver.config.driver.httpConnection.apiKey"
+
