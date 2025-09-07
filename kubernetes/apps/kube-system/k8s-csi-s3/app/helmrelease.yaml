@@ -1,0 +1,46 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: yandex-s3
+spec:
+  interval: 5m
+  url: https://yandex-cloud.github.io/k8s-csi-s3/charts
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmChart
+metadata:
+  name: csi-s3
+spec:
+  interval: 5m0s
+  chart: csi-s3
+  reconcileStrategy: ChartVersion
+  sourceRef:
+    kind: HelmRepository
+    name: yandex-s3
+  version: '0.43.2'
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: csi-s3
+spec:
+  interval: 1h
+  chartRef:
+    kind: HelmChart
+    name: csi-s3
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    secret:
+      create: false
+    storageClass:
+      name: morbo-versity
+      singleBucket: buckets
