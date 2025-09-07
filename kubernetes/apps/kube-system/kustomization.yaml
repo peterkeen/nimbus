@@ -10,4 +10,4 @@ resources:
   - ./multus/ks.yaml
   - ./onepassword/ks.yaml
   - ./k8s-csi-s3/ks.yaml
-  - ./democratic-csi/ks.yaml
+
