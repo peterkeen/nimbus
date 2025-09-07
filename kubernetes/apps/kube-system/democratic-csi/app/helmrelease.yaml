@@ -84,6 +84,5 @@ spec:
   valuesFrom:
     - kind: Secret
       name: morbo-api-key
-      valuesKey: apiKey
-      targetPath: "driver.config.driver.httpConnection.apiKey"
+      targetPath: "driver.config.driver.httpConnection"
 
