@@ -51,9 +51,6 @@ spec:
           fsType: ext4
         mountOptions: []
 
-    volumeSnapshotClasses:
-      - name: freenas-iscsi-csi
-
     driver:
       existingConfigSecret: morbo-democratic-csi-iscsi-config
       config:
