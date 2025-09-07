@@ -16,7 +16,7 @@ apiVersion: v1
 metadata:
   name: jellyfin-cache-pvc
 spec:
-  storageClassName: local-path
+  storageClassName: morbo-versity
   accessModes:
     - ReadWriteOnce
   resources:
@@ -46,6 +46,8 @@ spec:
       labels:
         app: jellyfin
     spec:
+      nodeName: nibbler
+
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
