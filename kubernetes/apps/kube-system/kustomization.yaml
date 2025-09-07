@@ -6,7 +6,7 @@ namespace: kube-system
 resources:
   - ./cilium/ks.yaml
   - ./metrics-server/ks.yaml
-#  - ./local-path-provisioner/ks.yaml
+  - ./local-path-provisioner/ks.yaml
   - ./multus/ks.yaml
   - ./onepassword/ks.yaml
   - ./k8s-csi-s3/ks.yaml
