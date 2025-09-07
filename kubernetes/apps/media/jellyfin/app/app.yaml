@@ -45,15 +45,9 @@ spec:
             server: 10.73.95.84
             path: /mnt/tank/media/jellyfin/cache
         - name: jellyfin-transcodes
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes:
-                  - "ReadWriteOnce"
-                storageClassName: "local-path"
-                resources:
-                  requests:
-                    storage: 64Gi
+          hostPath:
+            path: /var/mnt/data/jellyfin-transcodes
+            type: DirectoryOrCreate
         - name: dev
           hostPath:
             path: /dev
