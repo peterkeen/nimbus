@@ -74,7 +74,7 @@ spec:
                 storageClassName: "local-path"
                 resources:
                   requests:
-                    storage: 64Gi                    
+                    storage: 64Gi
         - name: dev
           hostPath:
             path: /dev
