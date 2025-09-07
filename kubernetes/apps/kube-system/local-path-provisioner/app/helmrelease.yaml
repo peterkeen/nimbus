@@ -32,9 +32,9 @@ spec:
       retries: 3
   values:
     nodePathMap:
-      - node: nibbler
+      - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
         paths:
           - /var/mnt/data
-      - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
+      - node: nimbus
         paths:
           - /var/mnt/local-path-provisioner-3
