@@ -50,7 +50,7 @@ spec:
             path: /mnt/tank/media
         - name: jellyfin-configs
           persistentVolumeClaim:
-            claimName: jellyfin-configs-pvc
+            claimName: jellyfin-configs-pvc-2
         - name: jellyfin-transcodes
           ephemeral:
             volumeClaimTemplate:
