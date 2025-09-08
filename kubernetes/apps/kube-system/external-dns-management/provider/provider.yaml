@@ -1,0 +1,12 @@
+---
+apiVersion: dns.gardener.cloud/v1alpha1
+kind: DNSProvider
+metadata:
+  name: aws
+spec:
+  type: aws-route53
+  secretRef:
+    name: aws-dns-credentials
+  domains:
+    include:
+      - keen.land
