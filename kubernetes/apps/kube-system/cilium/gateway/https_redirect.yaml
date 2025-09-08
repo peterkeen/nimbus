@@ -5,7 +5,7 @@ metadata:
   name: private-gw-redirect-http-to-https
 spec:
   parentRefs:
-    - name: private-gw
+    - name: private-gateway
       sectionName: http
   rules:
     - filters:
