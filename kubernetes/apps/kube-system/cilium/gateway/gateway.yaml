@@ -12,13 +12,19 @@ spec:
       allowedRoutes:
         namespaces:
           from: Selector
-        selector:
-          gateway: private
+          selector:
+            gateway: private-gw
     - protocol: HTTPS
       port: 443
       name: wildcard-https-private-gw
       hostname: "*.keen.land"
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            gateway: private-gw
       tls:
+        mode: Terminate
         certificateRefs:
           - kind: Secret
             group: ""
