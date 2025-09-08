@@ -23,5 +23,6 @@ spec:
       tls:
         certificateRefs:
           - kind: Secret
+            group: ""
             name: wildcard-prod
             namespace: cert-manager
