@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ./clusterissuer.yaml
   - ./wildcard_cert.yaml
+  - ./reference_grant.yaml
