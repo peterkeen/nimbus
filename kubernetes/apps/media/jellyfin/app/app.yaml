@@ -95,5 +95,3 @@ spec:
   ports:
     - protocol: TCP
       port: 8096
-  type: LoadBalancer
-  loadBalancerClass: io.cilium/l2-announcer
