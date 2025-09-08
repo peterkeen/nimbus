@@ -4,4 +4,4 @@ kind: Kustomization
 
 resources:
   - ./gateway.yaml
-  - ./http_redirect.yaml
+  - ./https_redirect.yaml
