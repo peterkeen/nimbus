@@ -22,7 +22,7 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: external-dns-management
+      chart: ./charts/external-dns-management
       version: '0.1.0'
       sourceRef:
         kind: GitRepository
