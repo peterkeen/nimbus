@@ -22,7 +22,8 @@ spec:
       labels:
         app: jellyfin
     spec:
-      nodeName: nibbler
+      nodeSelector:
+        kubernetes.io/hostname: nibbler
       volumes:
         # - name: media-nfs
         #   nfs:
@@ -65,24 +66,24 @@ spec:
               memory: "4Gi"
             limits:
               memory: "4Gi"
-        # - name: jellyfin-clean-cache
-        #   image: alpine:3.22
-        #   volumeMounts:
-        #     - name: jellyfin-transcodes
-        #       mountPath: /transcodes
-        #   resources:
-        #     requests:
-        #       memory: "128Mi"
-        #     limits:
-        #       memory: "128Mi"
-        #   command:
-        #     - /bin/ash
-        #     - -c
-        #     - |
-        #       while true; do
-        #         find /transcodes -mmin +119 -type f -exec rm -fv {} \;
-        #         sleep 60
-        #       done
+              # - name: jellyfin-clean-cache
+              #   image: alpine:3.22
+              #   volumeMounts:
+              #     - name: jellyfin-transcodes
+              #       mountPath: /transcodes
+              #   resources:
+              #     requests:
+              #       memory: "128Mi"
+              #     limits:
+              #       memory: "128Mi"
+              #   command:
+              #     - /bin/ash
+              #     - -c
+              #     - |
+              #       while true; do
+              #         find /transcodes -mmin +119 -type f -exec rm -fv {} \;
+              #         sleep 60
+              #       done
 ---
 apiVersion: v1
 kind: Service
