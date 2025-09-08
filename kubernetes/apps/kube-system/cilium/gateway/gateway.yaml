@@ -13,7 +13,8 @@ spec:
         namespaces:
           from: Selector
           selector:
-            gateway: private-gw
+            matchLabels:
+              gateway: private-gw
     - protocol: HTTPS
       port: 443
       name: wildcard-https-private-gw
@@ -22,7 +23,8 @@ spec:
         namespaces:
           from: Selector
           selector:
-            gateway: private-gw
+            matchLabels:
+              gateway: private-gw
       tls:
         mode: Terminate
         certificateRefs:
