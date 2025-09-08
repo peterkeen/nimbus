@@ -25,24 +25,24 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: nibbler
       volumes:
-        # - name: media-nfs
-        #   nfs:
-        #     server: 10.73.95.84
-        #     path: /mnt/tank/media
+        - name: media-nfs
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/media
         - name: jellyfin-config
           persistentVolumeClaim:
             claimName: jellyfin-config-pvc
-            # - name: jellyfin-cache
-            #   nfs:
-            #     server: 10.73.95.84
-            #     path: /mnt/tank/media/jellyfin/cache
-            # - name: jellyfin-transcodes
-            #   hostPath:
-            #     path: /var/mnt/data/jellyfin-transcodes
-            #     type: DirectoryOrCreate
-            # - name: dev
-            #   hostPath:
-            #     path: /dev
+        - name: jellyfin-cache
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/media/jellyfin/cache
+        - name: jellyfin-transcodes
+          hostPath:
+            path: /var/mnt/data/jellyfin-transcodes
+            type: DirectoryOrCreate
+        - name: dev
+          hostPath:
+            path: /dev
       containers:
         - name: jellyfin
           image: ghcr.io/jellyfin/jellyfin:10.10.7
@@ -51,39 +51,39 @@ spec:
             privileged: true
             runAsUser: 0
           volumeMounts:
-            # - name: media-nfs
-            #   mountPath: /mnt/media
+            - name: media-nfs
+              mountPath: /mnt/media
             - name: jellyfin-config
               mountPath: /config
-              # - name: jellyfin-cache
-              #   mountPath: /cache
-              # - name: jellyfin-transcodes
-              #   mountPath: /transcodes
-              # - name: dev
-              #   mountPath: /dev
+            - name: jellyfin-cache
+              mountPath: /cache
+            - name: jellyfin-transcodes
+              mountPath: /transcodes
+            - name: dev
+              mountPath: /dev
           resources:
             requests:
               memory: "4Gi"
             limits:
               memory: "4Gi"
-              # - name: jellyfin-clean-cache
-              #   image: alpine:3.22
-              #   volumeMounts:
-              #     - name: jellyfin-transcodes
-              #       mountPath: /transcodes
-              #   resources:
-              #     requests:
-              #       memory: "128Mi"
-              #     limits:
-              #       memory: "128Mi"
-              #   command:
-              #     - /bin/ash
-              #     - -c
-              #     - |
-              #       while true; do
-              #         find /transcodes -mmin +119 -type f -exec rm -fv {} \;
-              #         sleep 60
-              #       done
+        - name: jellyfin-clean-cache
+          image: alpine:3.22
+          volumeMounts:
+            - name: jellyfin-transcodes
+              mountPath: /transcodes
+          resources:
+            requests:
+              memory: "128Mi"
+            limits:
+              memory: "128Mi"
+          command:
+            - /bin/ash
+            - -c
+            - |
+              while true; do
+                find /transcodes -mmin +119 -type f -exec rm -fv {} \;
+                sleep 60
+              done
 ---
 apiVersion: v1
 kind: Service
