@@ -13,3 +13,15 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+    - protocol: HTTPS
+      port: 443
+      name: private-gw-https
+      hostname: "*.keen.land"
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: wildcard-prod
+            namespace: cert-manager
