@@ -40,3 +40,7 @@ spec:
       retries: 3
   values:
     domain: keen.land
+    watchedResources:
+      - Ingress
+      - Service
+      - HTTPRoute
