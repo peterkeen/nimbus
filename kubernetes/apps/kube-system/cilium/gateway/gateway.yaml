@@ -12,7 +12,4 @@ spec:
       hostname: "*.keen.land"
       allowedRoutes:
         namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              gateway: private-gw
+          from: All
