@@ -7,8 +7,6 @@ spec:
   parentRefs:
     - name: private-gateway
       sectionName: http
-  hostnames:
-    - "*"
   rules:
     - filters:
         - type: RequestRedirect
