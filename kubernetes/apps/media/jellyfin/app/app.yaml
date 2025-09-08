@@ -54,12 +54,12 @@ spec:
             #   mountPath: /mnt/media
             - name: jellyfin-config
               mountPath: /config
-            # - name: jellyfin-cache
-            #   mountPath: /cache
-            # - name: jellyfin-transcodes
-            #   mountPath: /transcodes
-            # - name: dev
-            #   mountPath: /dev
+              # - name: jellyfin-cache
+              #   mountPath: /cache
+              # - name: jellyfin-transcodes
+              #   mountPath: /transcodes
+              # - name: dev
+              #   mountPath: /dev
           resources:
             requests:
               memory: "4Gi"
