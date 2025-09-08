@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ./pvc.yaml
   - ./app.yaml
+  - ./route.yaml
