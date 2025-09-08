@@ -8,14 +8,14 @@ spec:
   listeners:
     - protocol: HTTP
       port: 80
-      name: private-gw
+      name: http
       hostname: "*.keen.land"
       allowedRoutes:
         namespaces:
           from: All
     - protocol: HTTPS
       port: 443
-      name: private-gw-https
+      name: https
       hostname: "*.keen.land"
       allowedRoutes:
         namespaces:
