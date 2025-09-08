@@ -31,17 +31,17 @@ spec:
         - name: jellyfin-config
           persistentVolumeClaim:
             claimName: jellyfin-config-pvc
-        # - name: jellyfin-cache
-        #   nfs:
-        #     server: 10.73.95.84
-        #     path: /mnt/tank/media/jellyfin/cache
-        # - name: jellyfin-transcodes
-        #   hostPath:
-        #     path: /var/mnt/data/jellyfin-transcodes
-        #     type: DirectoryOrCreate
-        # - name: dev
-        #   hostPath:
-        #     path: /dev
+            # - name: jellyfin-cache
+            #   nfs:
+            #     server: 10.73.95.84
+            #     path: /mnt/tank/media/jellyfin/cache
+            # - name: jellyfin-transcodes
+            #   hostPath:
+            #     path: /var/mnt/data/jellyfin-transcodes
+            #     type: DirectoryOrCreate
+            # - name: dev
+            #   hostPath:
+            #     path: /dev
       containers:
         - name: jellyfin
           image: ghcr.io/jellyfin/jellyfin:10.10.7
@@ -50,16 +50,16 @@ spec:
             privileged: true
             runAsUser: 0
           volumeMounts:
-            - name: media-nfs
-              mountPath: /mnt/media
+            # - name: media-nfs
+            #   mountPath: /mnt/media
             - name: jellyfin-config
               mountPath: /config
-            - name: jellyfin-cache
-              mountPath: /cache
-            - name: jellyfin-transcodes
-              mountPath: /transcodes
-            - name: dev
-              mountPath: /dev
+            # - name: jellyfin-cache
+            #   mountPath: /cache
+            # - name: jellyfin-transcodes
+            #   mountPath: /transcodes
+            # - name: dev
+            #   mountPath: /dev
           resources:
             requests:
               memory: "4Gi"
