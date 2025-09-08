@@ -5,7 +5,7 @@ metadata:
   name: jellyfin
 spec:
   parentRefs:
-    - name: private-gw
+    - name: private-gateway
       namespace: kube-system
   hostnames:
     - jellyfin.keen.land
