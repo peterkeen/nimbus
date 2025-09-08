@@ -1,0 +1,40 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: fairwinds-stable
+spec:
+  interval: 5m
+  url: https://charts.fairwinds.com/stable
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmChart
+metadata:
+  name: vpa
+spec:
+  interval: 5m0s
+  chart: vpa
+  reconcileStrategy: ChartVersion
+  sourceRef:
+    kind: HelmRepository
+    name: fairwinds-stable
+  version: '4.8.1'
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vpa
+spec:
+  interval: 1h
+  chartRef:
+    kind: HelmChart
+    name: vpa
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
