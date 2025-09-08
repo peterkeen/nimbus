@@ -11,3 +11,4 @@ resources:
   - ./onepassword/ks.yaml
   - ./k8s-csi-s3/ks.yaml
   - ./vpa/ks.yaml
+  - ./k8s_gateway/ks.yaml
