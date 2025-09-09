@@ -1,0 +1,35 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: democratic-csi
+spec:
+  interval: 5m
+  url: https://democratic-csi.github.io/charts/
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: morbo-zfs
+spec:
+  interval: 1h
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  chart:
+    spec:
+      chart: democratic-csi
+      version: 0.15.0
+  valuesFrom:
+    - kind: ConfigMap
+      name: morbo-zfs-config
+    - kind: Secret
+      name: morbo-zfs-secret
+      valuesKey: ADMIN_PASSWORD
+      targetPath: driver.config.httpConnection.password
