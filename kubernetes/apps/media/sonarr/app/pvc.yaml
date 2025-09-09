@@ -4,7 +4,7 @@ apiVersion: v1
 metadata:
   name: sonarr-pvc
 spec:
-  storageClassName: morbo-nfs
+  storageClassName: morbo-zfs
   accessModes:
     - ReadWriteMany
   resources:
