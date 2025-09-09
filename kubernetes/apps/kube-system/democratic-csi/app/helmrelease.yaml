@@ -37,6 +37,6 @@ spec:
       valuesKey: ADMIN_PASSWORD
       targetPath: driver.config.httpConnection.password
     - kind: Secret
-      name: morbo-zfs-ssh
-      valuesKey: "private key"
+      name: morbo-zfs-secret
+      valuesKey: "ROOT_SSH_PRIVATE_KEY"
       targetPath: driver.config.sshConnection.privateKey
