@@ -20,7 +20,7 @@ spec:
       volumes:
         - name: media-nfs
           persistentVolumeClaim:
-            claimName: media-nfs
+            claimName: media-nfs-test
         - name: sonarr-configs
           persistentVolumeClaim:
             claimName: sonarr-configs-pvc
