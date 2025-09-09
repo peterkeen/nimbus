@@ -9,3 +9,6 @@ configMapGenerator:
   - name: morbo-zfs-config
     files:
       - values.yaml
+
+configurations:
+  - kustomizeconfig.yaml
