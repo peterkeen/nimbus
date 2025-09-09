@@ -26,9 +26,11 @@ spec:
         kubernetes.io/hostname: nibbler
       volumes:
         - name: media-nfs
-          nfs:
-            server: 10.73.95.84
-            path: /mnt/tank/media
+          persistentVolumeClaim:
+            claimName: media-nfs
+          # nfs:
+          #   server: 10.73.95.84
+          #   path: /mnt/tank/media
         - name: jellyfin-config
           persistentVolumeClaim:
             claimName: jellyfin-config-pvc

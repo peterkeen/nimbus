@@ -13,14 +13,14 @@ spec:
   mountOptions:
     - nfsvers=4.1
   nfs:
-    path: "/mnt/tank/media/whatever"
+    path: "/mnt/tank/media"
     server: 10.73.95.84
     readOnly: false
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: media-nfs-test
+  name: media-nfs
   namespace: media
 spec:
   accessModes:
