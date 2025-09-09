@@ -15,7 +15,6 @@ resources:
   - ./external-dns-management/ks.yaml
 
   # storage systems
-  - ./democratic-csi/ks.yaml
   - ./k8s-csi-s3/ks.yaml
   - ./local-path-provisioner/ks.yaml
 
