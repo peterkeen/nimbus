@@ -4,11 +4,17 @@ kind: Kustomization
 namespace: kube-system
 
 resources:
+  # core systems
   - ./cilium/ks.yaml
   - ./metrics-server/ks.yaml
-  - ./local-path-provisioner/ks.yaml
   - ./multus/ks.yaml
   - ./onepassword/ks.yaml
-  - ./k8s-csi-s3/ks.yaml
+
+  # secondary systems
   - ./vpa/ks.yaml
   - ./external-dns-management/ks.yaml
+
+  # storage systems
+  - ./k8s-csi-s3/ks.yaml
+  - ./csi-driver-nfs/ks.yaml
+  - ./local-path-provisioner/ks.yaml
