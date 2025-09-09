@@ -12,7 +12,7 @@ resources:
 
   # secondary systems
   - ./vpa/ks.yaml
-  #- ./external-dns-management/ks.yaml
+  - ./external-dns-management/ks.yaml
 
   # storage systems
   - ./k8s-csi-s3/ks.yaml
