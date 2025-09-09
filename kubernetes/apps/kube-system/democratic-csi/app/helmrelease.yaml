@@ -26,6 +26,9 @@ spec:
     spec:
       chart: democratic-csi
       version: 0.15.0
+      sourceRef:
+        kind: HelmRepository
+        name: democratic-csi
   valuesFrom:
     - kind: ConfigMap
       name: morbo-zfs-config
