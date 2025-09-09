@@ -10,7 +10,6 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: morbo-nfs
   mountOptions:
     - nfsvers=4.1
   nfs:
