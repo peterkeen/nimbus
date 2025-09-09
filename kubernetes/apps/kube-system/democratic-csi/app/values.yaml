@@ -74,11 +74,12 @@ driver:
       #   sudoEnabled: true
       #
       #  leave paths unset for auto-detection
-      paths:
-        zfs: /sbin/zfs
-        zpool: /sbin/zpool
-        sudo: /bin/sudo
-        chroot: /sbin/chroot
+      cli:
+        paths:
+          zfs: /sbin/zfs
+          zpool: /sbin/zpool
+          sudo: /bin/sudo
+          chroot: /sbin/chroot
 
       # can be used to set arbitrary values on the dataset/zvol
       # can use handlebars templates with the parameters from the storage class/CO
