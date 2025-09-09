@@ -21,9 +21,9 @@ spec:
         - name: media-nfs
           persistentVolumeClaim:
             claimName: media-nfs-test
-        - name: sonarr-configs
+        - name: sonarr-config
           persistentVolumeClaim:
-            claimName: sonarr-configs-pvc
+            claimName: sonarr-pvc
       containers:
         - name: sonarr
           image: lscr.io/linuxserver/sonarr:latest
@@ -36,5 +36,5 @@ spec:
           volumeMounts:
             - name: media-nfs
               mountPath: /media
-            - name: sonarr-configs
+            - name: sonarr-config
               mountPath: /config
