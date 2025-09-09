@@ -22,4 +22,6 @@ spec:
         kind: HelmRepository
         name: csi-driver-nfs
       interval: 5m
-
+    values:
+      controller:
+        workingMountDir: /var/csi-driver-nfs
