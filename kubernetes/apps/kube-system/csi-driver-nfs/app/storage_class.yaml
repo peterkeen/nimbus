@@ -6,7 +6,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: 10.73.95.84
-  share: /mnt/tank/k8s/pv
+  share: /mnt/tank/k8s/csi
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 allowVolumeExpansion: true
