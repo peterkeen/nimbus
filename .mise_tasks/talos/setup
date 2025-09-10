@@ -6,7 +6,7 @@ set -o pipefail
 
 talosroot=$(dirname $TALOSCONFIG)
 
-cp_node=$(yq '.nodes[] | select(.controlPlane == true) | .hostname' talos/talconfig.yaml)
+cp_node=$(yq '.nodes[] | select(.controlPlane == true) | .hostname' talos/talconfig.yaml | sort -R | head -n 1)
 
 mkdir -p $talosroot
 
