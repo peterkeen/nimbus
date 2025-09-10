@@ -19,8 +19,9 @@ spec:
     spec:
       volumes:
         - name: media-nfs
-          persistentVolumeClaim:
-            claimName: media-nfs-test
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/media
         - name: sonarr-config
           persistentVolumeClaim:
             claimName: sonarr-pvc
