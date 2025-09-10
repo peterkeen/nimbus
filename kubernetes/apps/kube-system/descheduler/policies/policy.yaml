@@ -1,6 +1,8 @@
 ---
 apiVersion: "descheduler/v1alpha2"
 kind: "DeschedulerPolicy"
+metadata:
+  name: descheduler-policies
 profiles:
   - name: LowNodeUtilization
     pluginConfig:
