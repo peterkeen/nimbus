@@ -9,7 +9,7 @@ spec:
       namespace: kube-system
       sectionName: https
   hostnames:
-    - jellyfin-test.keen.land
+    - jellyfin.keen.land
   rules:
     - matches:
         - path:
