@@ -15,6 +15,10 @@ patches:
       kubelet:
         extraArgs:
           rotate-server-certificates: true
+        extraConfig:
+          memorySwap:
+            swapBehavior: LimitedSwap
+
       features:
         hostDNS:
           enabled: true
@@ -150,9 +154,11 @@ nodes:
             match: system_disk
           minSize: 10GiB
           grow: true
+    extraManifests:
+      - zswap.yaml
 
   - hostname: nibbler
-    ipAddress: 10.73.95.74
+    ipAddress: 10.73.95.204
     installDisk: /dev/sda
     controlPlane: false
     kernelModules:
@@ -164,7 +170,7 @@ nodes:
     networkInterfaces:
       - interface: eth0
         addresses:
-          - 10.73.95.74/24
+          - 10.73.95.204/24
         routes:
           - network: 0.0.0.0/0
             gateway: 10.73.95.1
@@ -179,7 +185,6 @@ nodes:
             - siderolabs/i915
             - siderolabs/util-linux-tools
             - siderolabs/iscsi-tools
-
     userVolumes:
       - name: data
         provisioning:
@@ -187,3 +192,5 @@ nodes:
             match: disk.transport == "virtio"
           minSize: 200Gi
           grow: true
+    extraManifests:
+      - zswap.yaml
