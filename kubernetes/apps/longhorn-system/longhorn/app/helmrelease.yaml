@@ -18,7 +18,7 @@ spec:
       chart: longhorn
       version: '1.9.1'
       sourceRef:
-        kind: HelmRelease
+        kind: HelmRepository
         name: longhorn
       interval: 5m
   values:
