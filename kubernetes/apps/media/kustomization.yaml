@@ -5,5 +5,5 @@ kind: Kustomization
 namespace: media
 resources:
   - ./namespace.yaml
-  - ./jellyfin/ks.yaml
+  #- ./jellyfin/ks.yaml
   # - ./sonarr/ks.yaml
