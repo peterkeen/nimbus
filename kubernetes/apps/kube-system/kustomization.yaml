@@ -16,5 +16,5 @@ resources:
 
   # storage systems
   - ./k8s-csi-s3/ks.yaml
-  - ./local-path-provisioner/ks.yaml
+  # - ./local-path-provisioner/ks.yaml
 

@@ -1,0 +1,48 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: longhorn
+spec:
+  interval: 5m
+  url: https://charts.longhorn.io
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: longhorn
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: longhorn
+      version: '1.9.1'
+      sourceRef:
+        kind: HelmRelease
+        name: longhorn
+      interval: 5m
+  values:
+    defaultSettings:
+      backupTarget: nfs://10.73.95.84:/mnt/tank/backups/longhorn
+      defaultReplicaCount: 2
+      defaultDataLocality: best-effort
+      replicaAutoBalance: least-effort
+      defaultDataPath: /var/lib/data
+      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+      allowVolumeCreationWithDegradedAvailability: false
+      replicaSoftAntiAffinity: false
+    longhornManager:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+    longhornConversionWebhook:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+    longhornAdmissionWebhook:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"

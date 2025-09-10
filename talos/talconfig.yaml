@@ -53,38 +53,6 @@ controlPlane:
               - kube-system
 
 nodes:
-  - hostname: nimbus
-    ipAddress: 10.73.95.212
-    installDisk: /dev/sda
-    controlPlane: false
-    networkInterfaces:
-      - interface: eth0
-        addresses:
-          - 10.73.95.212/24
-        routes:
-          - network: 0.0.0.0/0
-            gateway: 10.73.95.1
-            metric: 1024
-    schematic:
-      customization:
-        systemExtensions:
-          officialExtensions:
-            - siderolabs/qemu-guest-agent
-            - siderolabs/i915
-            - siderolabs/util-linux-tools
-            - siderolabs/iscsi-tools
-    volumes:
-      - name: EPHEMERAL
-        provisioning:
-          maxSize: 40GB
-    userVolumes:
-      - name: local-path-provisioner-3
-        provisioning:
-          diskSelector:
-            match: system_disk
-          minSize: 10GiB
-          grow: true
-
   - hostname: lrrr-nimbus-control
     ipAddress: 10.73.95.227
     installDisk: /dev/sda
@@ -150,6 +118,38 @@ nodes:
             - siderolabs/qemu-guest-agent
             - siderolabs/util-linux-tools
             - siderolabs/iscsi-tools
+
+  - hostname: nimbus
+    ipAddress: 10.73.95.212
+    installDisk: /dev/sda
+    controlPlane: false
+    networkInterfaces:
+      - interface: eth0
+        addresses:
+          - 10.73.95.212/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 10.73.95.1
+            metric: 1024
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/qemu-guest-agent
+            - siderolabs/i915
+            - siderolabs/util-linux-tools
+            - siderolabs/iscsi-tools
+    volumes:
+      - name: EPHEMERAL
+        provisioning:
+          maxSize: 40GB
+    userVolumes:
+      - name: data
+        provisioning:
+          diskSelector:
+            match: system_disk
+          minSize: 10GiB
+          grow: true
 
   - hostname: nibbler
     ipAddress: 10.73.95.74
