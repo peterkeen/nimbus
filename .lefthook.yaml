@@ -1,6 +1,9 @@
 ---
 pre-commit:
   jobs:
+    - name: Find duplicate resources
+      run: mise precommit:duplicate_check {staged_files}
     - name: Format YAML
       run: yamlfmt {staged_files}
       glob: "*.yaml"
+      stage_fixed: true

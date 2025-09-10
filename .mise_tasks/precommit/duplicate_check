@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+output=$(yq -N eval 'explode(.) | has("apiVersion") | .kind + " " + .metadata.name' $@ | grep '[[:graph:]]' | sort | uniq -c | awk '{if ($1 > 1) print}')
+
+if [[ $output = *[![:space:]]*  ]]; then
+    echo "FOUND DUPLICATE RESOURCES"
+    echo $output
+    exit 1
+fi
