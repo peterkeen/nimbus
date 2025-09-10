@@ -2,7 +2,7 @@
 set -e
 
 #MISE description="bootstrap the talos etcd"
-#MISE depends=["talos:apply"]
+#MISE depends=["talos:setup"]
 
 echo "Waiting 10 seconds for apply to complete"
 sleep 10
