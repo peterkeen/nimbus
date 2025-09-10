@@ -6,4 +6,4 @@ namespace: media
 resources:
   - ./namespace.yaml
   - ./jellyfin/ks.yaml
-  # - ./sonarr/ks.yaml
+  - ./sonarr/ks.yaml
