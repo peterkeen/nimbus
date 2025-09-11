@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+  labels:
+    app: prowlarr
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      volumes:
+        - name: media-nfs
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/media
+        - name: prowlarr-config
+          persistentVolumeClaim:
+            claimName: prowlarr-pvc
+      containers:
+        - name: prowlarr
+          image: lscr.io/linuxserver/prowlarr:latest
+          imagePullPolicy: "Always"
+          resources:
+            requests:
+              memory: 256Mi
+            limits:
+              memory: 256Mi
+          volumeMounts:
+            - name: media-nfs
+              mountPath: /media
+            - name: prowlarr-config
+              mountPath: /config

@@ -1,0 +1,20 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: prowlarr
+spec:
+  parentRefs:
+    - name: private-traefik
+      namespace: kube-system
+      sectionName: websecure
+  hostnames:
+    - prowlarr.nimbus.keen.land
+    - prowlarr.keen.land
+  rules:
+    - matches:
+        - path:
+            value: /
+      backendRefs:
+        - name: prowlarr
+          port: 9696
