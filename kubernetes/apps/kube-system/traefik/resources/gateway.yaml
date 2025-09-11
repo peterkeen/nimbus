@@ -11,13 +11,13 @@ spec:
   listeners:
     - protocol: HTTP
       port: 80
-      name: http
+      name: web
       allowedRoutes:
         namespaces:
           from: All
     - protocol: HTTPS
       port: 443
-      name: https
+      name: websecure
       allowedRoutes:
         namespaces:
           from: All
