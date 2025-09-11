@@ -8,4 +8,4 @@ spec:
     app: sonarr
   ports:
     - protocol: TCP
-      port: 7878
+      port: 8989
