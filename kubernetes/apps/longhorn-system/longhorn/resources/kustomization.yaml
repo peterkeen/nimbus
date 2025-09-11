@@ -5,3 +5,4 @@ resources:
   - ./backup_job.yaml
   - ./filesystem_trim_job.yaml
   - ./storage_class.yaml
+  - ./ingress.yaml
