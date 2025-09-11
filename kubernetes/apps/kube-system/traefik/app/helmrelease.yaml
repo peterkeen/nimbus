@@ -5,7 +5,7 @@ metadata:
   name: traefik
 spec:
   interval: 5m
-  url: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+  url: https://traefik.github.io/charts
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
