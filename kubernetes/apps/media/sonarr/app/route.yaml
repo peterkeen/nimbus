@@ -10,6 +10,7 @@ spec:
       sectionName: websecure
   hostnames:
     - sonarr.nimbus.keen.land
+    - sonarr.keen.land
   rules:
     - matches:
         - path:
