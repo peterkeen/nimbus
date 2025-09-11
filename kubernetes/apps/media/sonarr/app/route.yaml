@@ -7,7 +7,7 @@ spec:
   parentRefs:
     - name: private-traefik
       namespace: kube-system
-      sectionName: https
+      sectionName: websecure
   hostnames:
     - sonarr.nimbus.keen.land
   rules:
