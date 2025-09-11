@@ -14,7 +14,7 @@ resources:
   - ./vpa/ks.yaml
   - ./external-dns-management/ks.yaml
   - ./descheduler/ks.yaml
-  #- ./traefik/ks.yaml
+  - ./traefik/ks.yaml
 
   # storage systems
   - ./k8s-csi-s3/ks.yaml
