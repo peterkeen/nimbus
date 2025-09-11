@@ -31,3 +31,5 @@ spec:
     providers:
       kubernetesGateway:
         enabled: true
+    deployment:
+      replicas: 2
