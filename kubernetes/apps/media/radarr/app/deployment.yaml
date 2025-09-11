@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+  labels:
+    app: radarr
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      volumes:
+        - name: media-nfs
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/media
+        - name: radarr-config
+          persistentVolumeClaim:
+            claimName: radarr-pvc
+      containers:
+        - name: radarr
+          image: lscr.io/linuxserver/radarr:latest
+          imagePullPolicy: "Always"
+          resources:
+            requests:
+              memory: 512Mi
+            limits:
+              memory: 512Mi
+          volumeMounts:
+            - name: media-nfs
+              mountPath: /media
+            - name: radarr-config
+              mountPath: /config
