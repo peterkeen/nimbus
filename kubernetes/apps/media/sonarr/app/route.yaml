@@ -5,7 +5,7 @@ metadata:
   name: sonarr
 spec:
   parentRefs:
-    - name: private-gateway
+    - name: private-traefik
       namespace: kube-system
       sectionName: https
   hostnames:
