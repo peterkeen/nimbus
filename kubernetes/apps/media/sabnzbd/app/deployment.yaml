@@ -17,8 +17,6 @@ spec:
       labels:
         app: sabnzbd
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: crushinator
       volumes:
         - name: media-nfs
           nfs:
