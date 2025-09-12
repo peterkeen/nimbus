@@ -8,4 +8,4 @@ spec:
     app: jellyseerr
   ports:
     - protocol: TCP
-      port: 8989
+      port: 5055

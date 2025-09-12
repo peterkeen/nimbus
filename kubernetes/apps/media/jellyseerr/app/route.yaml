@@ -17,4 +17,4 @@ spec:
             value: /
       backendRefs:
         - name: jellyseerr
-          port: 8989
+          port: 5055
