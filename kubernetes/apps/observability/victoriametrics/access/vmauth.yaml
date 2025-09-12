@@ -7,4 +7,9 @@ spec:
   selectAllByDefault: true
   ingress:
     class_name: 'tailscale'
+    tlsHosts:
+      - vm
     host: vm
+    annotations:
+      tailscale.com/proxy-group: ingress-proxies
+
