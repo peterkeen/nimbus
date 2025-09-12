@@ -1,0 +1,61 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sabnzbd
+  labels:
+    app: sabnzbd
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: sabnzbd
+  template:
+    metadata:
+      labels:
+        app: sabnzbd
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: crushinator
+      volumes:
+        - name: media-nfs
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/media
+        - name: media-cwa-ingest
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/cwa-book-ingest
+        - name: sabnzbd-configs
+          persistentVolumeClaim:
+            claimName: sabnzbd-pvc
+        - name: sabnzbd-scratch
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes:
+                  - "ReadWriteOnce"
+                storageClassName: "local-path"
+                resources:
+                  requests:
+                    storage: 100Gi
+      containers:
+        - name: sabnzbd
+          image: lscr.io/linuxserver/sabnzbd:latest
+          imagePullPolicy: "IfNotPresent"
+          resources:
+            requests:
+              memory: 512Mi
+            limits:
+              memory: 2Gi
+          volumeMounts:
+            - name: media-nfs
+              mountPath: /downloads
+            - name: sabnzbd-configs
+              mountPath: /config
+            - name: media-cwa-ingest
+              mountPath: /cwa-book-ingest
+            - name: sabnzbd-scratch
+              mountPath: /incomplete-downloads
