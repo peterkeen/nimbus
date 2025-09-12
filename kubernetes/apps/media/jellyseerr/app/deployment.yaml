@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyseerr
+  labels:
+    app: jellyseerr
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: jellyseerr
+  template:
+    metadata:
+      labels:
+        app: jellyseerr
+    spec:
+      volumes:
+        - name: media-nfs
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/media
+        - name: jellyseerr-config
+          persistentVolumeClaim:
+            claimName: jellyseerr-pvc
+      containers:
+        - name: jellyseerr
+          image: ghcr.io/fallenbagel/jellyseerr:2.7.2
+          imagePullPolicy: "IfNotPresent"
+          resources:
+            requests:
+              memory: 512Mi
+            limits:
+              memory: 512Mi
+          volumeMounts:
+            - name: media-nfs
+              mountPath: /media
+            - name: jellyseerr-config
+              mountPath: /config
