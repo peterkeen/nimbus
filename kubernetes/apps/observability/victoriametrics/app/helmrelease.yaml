@@ -38,3 +38,4 @@ spec:
       useCustomConfigReloader: true
     serviceMonitor:
       enabled: true
+      vm: false
