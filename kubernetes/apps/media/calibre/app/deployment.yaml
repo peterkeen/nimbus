@@ -28,7 +28,7 @@ spec:
             path: /mnt/tank/cwa-book-ingest
         - name: calibre-configs
           persistentVolumeClaim:
-            claimName: calibre-configs-pvc
+            claimName: calibre-pvc
       containers:
         - name: calibre
           image: crocodilestick/calibre-web-automated:latest
