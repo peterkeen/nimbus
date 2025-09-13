@@ -15,6 +15,7 @@ resources:
   - ./external-dns-management/ks.yaml
   - ./descheduler/ks.yaml
   - ./traefik/ks.yaml
+  - ./daemonset-service-per-pod/ks.yaml
 
   # storage systems
   - ./k8s-csi-s3/ks.yaml
