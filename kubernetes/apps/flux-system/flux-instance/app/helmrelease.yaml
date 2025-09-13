@@ -29,6 +29,8 @@ spec:
         - kustomize-controller
         - helm-controller
         - notification-controller
+        - image-reflector-controller
+        - image-automation-controller
       sync:
         kind: GitRepository
         url: http://10.73.95.46:23232/nimbus.git
