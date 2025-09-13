@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calibre
+  labels:
+    app: calibre
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: calibre
+  template:
+    metadata:
+      labels:
+        app: calibre
+    spec:
+      volumes:
+        - name: books-nfs
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/media/books
+        - name: ingest-nfs
+          nfs:
+            server: 10.73.95.84
+            path: /mnt/tank/cwa-book-ingest
+        - name: calibre-configs
+          persistentVolumeClaim:
+            claimName: calibre-configs-pvc
+      containers:
+        - name: calibre
+          image: crocodilestick/calibre-web-automated:latest
+          imagePullPolicy: "IfNotPresent"
+          volumeMounts:
+            - name: books-nfs
+              mountPath: /calibre-library
+            - name: calibre-configs
+              mountPath: /config
+            - name: ingest-nfs
+              mountPath: /cwa-book-ingest
+          resources:
+            requests:
+              memory: '512Mi'
+            limits:
+              memory: '512Mi'
