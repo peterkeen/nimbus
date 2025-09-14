@@ -1,0 +1,20 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: minecraft-bluemap
+spec:
+  parentRefs:
+    - name: private-traefik
+      namespace: kube-system
+      sectionName: websecure
+  hostnames:
+    - mc.nimbus.keen.land
+    - mc.keen.land
+  rules:
+    - matches:
+        - path:
+            value: /
+      backendRefs:
+        - name: minecraft-bluemap
+          port: 8100

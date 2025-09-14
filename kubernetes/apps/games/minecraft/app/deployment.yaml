@@ -1,0 +1,70 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft
+  labels:
+    app: minecraft
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: minecraft
+  template:
+    metadata:
+      labels:
+        app: minecraft
+    spec:
+      volumes:
+        - name: minecraft-data
+          persistentVolumeClaim:
+            claimName: minecraft-pvc
+      containers:
+        - name: minecraft
+          image: ghcr.io/itzg/minecraft-server:2025.9.2
+          imagePullPolicy: "IfNotPresent"
+          resources:
+            requests:
+              memory: 6Gi
+            limits:
+              memory: 6Gi
+          volumeMounts:
+            - name: minecraft-data
+              mountPath: /data
+          env:
+            - name: TZ
+              value: America/Detroit
+            - name: TYPE
+              value: PAPER
+            - name: EULA
+              value: "true"
+            - name: MODE
+              value: creative
+            - name: DIFFICULTY
+              value: peaceful
+            - name: MEMORY
+              value: 8G
+            - name: ENABLE_AUTOPAUSE
+              value: "TRUE"
+            - name: OVERRIDE_SERVER_PROPERTIES
+              value: "TRUE"
+            - name: MAX_TICK_TIME
+              value: "-1"
+            - name: JVM_DD_OPTS
+              value: "disable.watchdog:true"
+            # - name: OPS
+            #   value: |2
+            #       .zr4il
+            #       zr4il
+            - name: MODRINTH_FORCE_SYNCHRONIZE
+              value: "true"
+            - name: MODRINTH_PROJECTS
+              value: |-
+                geyser:beta
+                luckperms:beta
+                multiverse-core:beta
+                multiverse-inventories:beta
+                multiverse-signportals:beta
+                bluemap:beta
