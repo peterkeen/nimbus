@@ -15,5 +15,5 @@ spec:
         - path:
             value: /
       backendRefs:
-        - name: wg-easy
+        - name: wg-easy-http
           port: 51821
