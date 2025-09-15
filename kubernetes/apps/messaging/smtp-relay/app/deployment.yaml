@@ -28,6 +28,9 @@ spec:
         - name: smtp-relay
           image: djjudas21/smtp-relay:0.10.0
           imagePullPolicy: "IfNotPresent"
+          envFrom:
+            - secretRef:
+                name: smtp-relay-secrets
           resources:
             requests:
               memory: 32Mi
