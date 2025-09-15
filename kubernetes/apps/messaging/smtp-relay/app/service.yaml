@@ -4,7 +4,6 @@ kind: Service
 metadata:
   name: smtp-relay
 spec:
-  clusterIP: None
   selector:
     app: smtp-relay
   ports:
