@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+  labels:
+    app: mosquitto
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      volumes:
+        - name: mosquitto-config
+          persistentVolumeClaim:
+            claimName: mosquitto-pvc
+      containers:
+        - name: mosquitto
+          image: eclipse-mosquitto:2.0.22
+          imagePullPolicy: "IfNotPresent"
+          resources:
+            requests:
+              memory: 128Mi
+            limits:
+              memory: 128Mi
+          volumeMounts:
+            - name: mosquitto-config
+              mountPath: /config
+          env:
+            - name: TZ
+              value: America/Detroit
