@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smtp-relay
+  labels:
+    app: smtp-relay
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: smtp-relay
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: smtp-relay
+                topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: smtp-relay
+          image: djjudas21/smtp-relay:0.10.0
+          imagePullPolicy: "IfNotPresent"
+          resources:
+            requests:
+              memory: 32Mi
+            limits:
+              memory: 32Mi

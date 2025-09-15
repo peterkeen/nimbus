@@ -9,9 +9,6 @@ spec:
   replicas: 1
   strategy:
     type: Recreate
-  selector:
-    matchLabels:
-      app: mosquitto
   template:
     metadata:
       labels:
