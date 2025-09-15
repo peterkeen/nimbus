@@ -5,4 +5,4 @@ kind: Kustomization
 namespace: wg-easy
 resources:
   - ./namespace.yaml
-  #- ./wg-easy/ks.yaml
+  - ./wg-easy/ks.yaml
