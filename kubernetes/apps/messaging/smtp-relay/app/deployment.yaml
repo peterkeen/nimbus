@@ -11,6 +11,9 @@ spec:
     metadata:
       labels:
         app: smtp-relay
+    selector:
+      labels:
+        app: smtp-relay
     spec:
       affinity:
         podAntiAffinity:

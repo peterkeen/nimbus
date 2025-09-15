@@ -13,6 +13,9 @@ spec:
     metadata:
       labels:
         app: mosquitto
+    selector:
+      labels:
+        app: mosquitto
     spec:
       volumes:
         - name: mosquitto-config
