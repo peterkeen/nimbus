@@ -5,4 +5,4 @@ kind: Kustomization
 namespace: public
 resources:
   - ./namespace.yaml
-  - ./traefik/ks.yaml
+  #- ./traefik/ks.yaml
