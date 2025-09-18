@@ -6,3 +6,4 @@ resources:
   - ./clusterissuer.yaml
   - ./wildcard_cert.yaml
   - ./reference_grant.yaml
+  - ./public_reference_grant.yaml
