@@ -1,0 +1,29 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: private-traefik
+  annotations:
+    dns.gardener.cloud/dnsnames: '*'
+    dns.gardener.cloud/ttl: "300"
+spec:
+  gatewayClassName: traefik
+  listeners:
+    - protocol: HTTP
+      port: 8000
+      name: web
+      allowedRoutes:
+        namespaces:
+          from: All
+    - protocol: HTTPS
+      port: 8443
+      name: websecure
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        certificateRefs:
+          - kind: Secret
+            group: ""
+            name: keenland-wildcard-cert
+            namespace: cert-manager
