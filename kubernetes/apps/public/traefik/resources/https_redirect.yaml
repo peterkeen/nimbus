@@ -2,10 +2,10 @@
 kind: HTTPRoute
 apiVersion: gateway.networking.k8s.io/v1beta1
 metadata:
-  name: private-traefik-https-redirect
+  name: public-traefik-https-redirect
 spec:
   parentRefs:
-    - name: private-traefik
+    - name: public-traefik
       sectionName: web
   rules:
     - filters:
