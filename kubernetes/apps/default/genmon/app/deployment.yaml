@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: genmon
+  labels:
+    app: genmon
+  annotations:
+    keel.sh/policy: "force"
+    keel.sh/trigger: poll
+    keel.sh/pollSchedule: "@every 10m"
+    keel.sh/approvals: "0"
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: genmon
+  template:
+    metadata:
+      labels:
+        app: genmon
+    spec:
+      volumes:
+        - name: genmon-configs
+          persistentVolumeClaim:
+            claimName: genmon-configs-pvc
+        - name: genmon-logs
+          persistentVolumeClaim:
+            claimName: genmon-logs-pvc
+        - name: devices
+          hostPath:
+            path: /dev
+      containers:
+        - name: genmon
+          image: "ghcr.io/peterkeen/genmon-docker:main"
+          imagePullPolicy: "Always"
+          volumeMounts:
+            - name: genmon-configs
+              mountPath: /etc/genmon
+            - name: genmon-logs
+              mountPath: /var/log
+            - name: devices
+              mountPath: /dev
+          resources:
+            requests:
+              memory: '128Mi'
+            limits:
+              memory: '128Mi'
+        - name: genmon-proxy
+          image: "ghcr.io/peterkeen/genmon-proxy:main"
+          imagePullPolicy: "Always"
+          command:
+            - "/app/proxy"
+          args:
+            - "--upstream"
+            - "http://localhost:8000"
+          resources:
+            requests:
+              memory: '16Mi'
+            limits:
+              memory: '16Mi'

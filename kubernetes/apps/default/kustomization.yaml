@@ -9,6 +9,7 @@ resources:
 
   - ./calendar-sync/ks.yaml
   - ./ezshare-sync/ks.yaml
+  - ./genmon/ks.yaml
   - ./home-assistant/ks.yaml
   - ./waterfurnace/ks.yaml
   - ./zigbee/house.yaml

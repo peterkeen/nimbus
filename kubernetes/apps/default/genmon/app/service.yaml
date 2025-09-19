@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: genmon
+spec:
+  selector:
+    app: genmon
+  ports:
+    - protocol: TCP
+      port: 8000
+      name: web
+    - protocol: TCP
+      port: 80
+      name: proxy

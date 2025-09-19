@@ -1,0 +1,24 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: genmon-configs-pvc
+  namespace: iot-system
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: genmon-logs-pvc
+  namespace: iot-system
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
