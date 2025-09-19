@@ -25,3 +25,4 @@ spec:
     substitute:
       hostname: "zigbee-house"
       selector: "zigbee-house"
+
