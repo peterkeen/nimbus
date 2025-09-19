@@ -22,7 +22,6 @@ spec:
         name: vm
       interval: 5m
   values:
-    mode: deployment
     global:
       cluster:
         dnsDomain: nimbus.keen.land.
@@ -33,5 +32,6 @@ spec:
         storageClassName: longhorn
       ingress:
         enabled: false
+      mode: deployment
     vector:
       enabled: true
