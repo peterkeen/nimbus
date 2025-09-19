@@ -7,3 +7,7 @@ resources:
   - ./deployment.yaml
   - ./service.yaml
 
+configMapGenerator:
+  - name: mosquitto
+    files:
+      - mosquitto.conf
