@@ -24,4 +24,4 @@ spec:
   postBuild:
     substitute:
       hostname: "zigbee-house"
-      selector: "zigbee-housex"
+      selector: "zigbee-house"
