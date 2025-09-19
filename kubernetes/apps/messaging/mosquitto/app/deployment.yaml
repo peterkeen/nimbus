@@ -20,7 +20,7 @@ spec:
       volumes:
         - name: mosquitto-config
           persistentVolumeClaim:
-            claimName: mosquitto-pvc
+            claimName: mosquitto
       containers:
         - name: mosquitto
           image: eclipse-mosquitto:2.0.22

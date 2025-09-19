@@ -2,7 +2,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: mosquitto-pvc
+  name: mosquitto
 spec:
   accessModes:
     - ReadWriteOnce

@@ -6,5 +6,5 @@ namespace: messaging
 resources:
   - ./namespace.yaml
 
-  #- ./mosquitto/ks.yaml
+  - ./mosquitto/ks.yaml
   - ./smtp-relay/ks.yaml
