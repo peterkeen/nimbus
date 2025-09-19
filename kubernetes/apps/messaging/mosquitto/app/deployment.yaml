@@ -31,7 +31,7 @@ spec:
             limits:
               memory: 128Mi
           volumeMounts:
-            - name: mosquitto
+            - name: mosquitto-config
               mountPath: /mosquitto
           env:
             - name: TZ
