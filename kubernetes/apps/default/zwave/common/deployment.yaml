@@ -30,7 +30,7 @@ spec:
             claimName: zwave-pvc
       containers:
         - name: zwave
-          image: ghcr.io/zwave-js/zwave-js-ui:11.1.0
+          image: ghcr.io/zwave-js/zwave-js-ui:11.3
           imagePullPolicy: "IfNotPresent"
           volumeMounts:
             - name: zwave
