@@ -1,0 +1,33 @@
+---
+# cron to actually do the restart
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: waterfurnace-restart
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  schedule: '0 10 * * *' # cron spec of time, here, 8 o'clock
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      activeDeadlineSeconds: 600 # timeout, makes most sense with
+      # "waiting for rollout" variant specified below
+      template:
+        spec:
+          serviceAccountName: waterfurnace-restart # name of the service
+          # account configured above
+          restartPolicy: Never
+          containers:
+            - name: kubectl
+              image: registry.suse.com/suse/kubectl
+              resources:
+                requests:
+                  memory: "64Mi"
+                limits:
+                  memory: "64Mi"
+              command:
+                - 'kubectl'
+                - 'rollout'
+                - 'restart'
+                - 'deployment/waterfurnace'

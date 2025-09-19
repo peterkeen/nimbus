@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: waterfurnace
+  labels:
+    app: waterfurnace
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: waterfurnace
+  template:
+    metadata:
+      labels:
+        app: waterfurnace
+    spec:
+      terminationGracePeriodSeconds: 1
+      containers:
+        - name: waterfurnace
+          image: ghcr.io/ccutrer/waterfurnace_aurora:v1.5.7
+          imagePullPolicy: "Always"
+          envFrom:
+            - secretRef:
+                name: waterfurnace-secrets
+          resources:
+            requests:
+              memory: '64Mi'
+            limits:
+              memory: '64Mi'
+      imagePullSecrets:
+        - name: ghcr.io
