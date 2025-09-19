@@ -9,6 +9,8 @@ resources:
 
   - ./ezshare-sync/ks.yaml
   - ./calendar-sync/ks.yaml
+  - ./zigbee/house.yaml
+  - ./zigbee/office.yaml
   - ./zwave/garage.yaml
   - ./zwave/house.yaml
   - ./zwave/office.yaml
