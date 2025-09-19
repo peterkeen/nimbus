@@ -35,6 +35,6 @@ spec:
       replicas: 2
     logs:
       general:
-        level: DEBUG
+        level: INFO
       access:
         enabled: true
