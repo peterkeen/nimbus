@@ -5,5 +5,5 @@ kind: Kustomization
 namespace: vm-system
 resources:
   - ./namespace.yaml
-  - ./victorialogs/ks.yaml
-#hm
+  #- ./victorialogs/ks.yaml
+
