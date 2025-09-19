@@ -9,4 +9,7 @@ resources:
 
   - ./ezshare-sync/ks.yaml
   - ./calendar-sync/ks.yaml
-  - ./zwave/testing.yaml
+  - ./zwave/garage.yaml
+  - ./zwave/house.yaml
+  - ./zwave/office.yaml
+  - ./zwave/shed.yaml
