@@ -32,6 +32,8 @@ spec:
           volumeMounts:
             - name: mosquitto
               mountPath: /mosquitto
+            - name: mosquitto-config
+              mountPath: /mosquitto/config
           env:
             - name: TZ
               value: America/Detroit
