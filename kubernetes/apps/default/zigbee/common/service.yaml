@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zigbee
+spec:
+  selector:
+    app: "${selector}"
+  ports:
+    - protocol: TCP
+      port: 8091
+      name: web
+    - protocol: TCP
+      port: 3000
+      name: ws
