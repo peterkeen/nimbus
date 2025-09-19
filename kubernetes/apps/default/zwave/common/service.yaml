@@ -5,7 +5,7 @@ metadata:
   name: zwave
 spec:
   selector:
-    app: zwave
+    app: "${selector}"
   ports:
     - protocol: TCP
       port: 8091
