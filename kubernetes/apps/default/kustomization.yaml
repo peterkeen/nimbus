@@ -7,8 +7,9 @@ resources:
   - ./ghcr_secret.yaml
   - ./static_macvlan.yaml
 
-  - ./ezshare-sync/ks.yaml
   - ./calendar-sync/ks.yaml
+  - ./ezshare-sync/ks.yaml
+  - ./home-assistant/ks.yaml
   - ./zigbee/house.yaml
   - ./zigbee/office.yaml
   - ./zwave/garage.yaml
