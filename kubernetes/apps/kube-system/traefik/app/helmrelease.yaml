@@ -33,3 +33,8 @@ spec:
         enabled: true
     deployment:
       replicas: 2
+    logs:
+      general:
+        level: INFO
+      access:
+        enabled: true
