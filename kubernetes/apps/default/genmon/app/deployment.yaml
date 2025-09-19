@@ -29,9 +29,6 @@ spec:
         - name: genmon-logs
           persistentVolumeClaim:
             claimName: genmon-logs-pvc
-        - name: devices
-          hostPath:
-            path: /dev
       containers:
         - name: genmon
           image: "ghcr.io/peterkeen/genmon-docker:main"
@@ -41,8 +38,6 @@ spec:
               mountPath: /etc/genmon
             - name: genmon-logs
               mountPath: /var/log
-            - name: devices
-              mountPath: /dev
           resources:
             requests:
               memory: '128Mi'
