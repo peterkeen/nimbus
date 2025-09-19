@@ -22,7 +22,7 @@ spec:
   template:
     metadata:
       labels:
-        app: zwave
+        app: "${selector}"
     spec:
       volumes:
         - name: zwave
