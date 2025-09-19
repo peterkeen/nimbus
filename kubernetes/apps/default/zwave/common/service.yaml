@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zwave
+spec:
+  selector:
+    app: zwave
+  ports:
+    - protocol: TCP
+      port: 8091
+      name: web
+    - protocol: TCP
+      port: 3000
+      name: ws

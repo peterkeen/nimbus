@@ -5,5 +5,8 @@ kind: Kustomization
 namespace: default
 resources:
   - ./ghcr_secret.yaml
+  - ./static_macvlan.yaml
+
   - ./ezshare-sync/ks.yaml
   - ./calendar-sync/ks.yaml
+  - ./zwave/testing.yaml
