@@ -17,4 +17,10 @@ spec:
             value: /
       backendRefs:
         - name: "${selector}"
-          port: 8989
+          port: 8091
+    - matches:
+        - path:
+            value: /ws
+      backendRefs:
+        - name: "${selector}"
+          port: 3000
