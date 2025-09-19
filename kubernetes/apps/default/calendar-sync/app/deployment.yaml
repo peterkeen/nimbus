@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calendar-sync
+  labels:
+    app: calendar-sync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calendar-sync
+  template:
+    metadata:
+      labels:
+        app: calendar-sync
+    spec:
+      volumes:
+        - name: secrets
+          secret:
+            secretName: calendar-sync-secrets
+      containers:
+        - name: calendar-sync
+          image: ghcr.io/peterkeen/k8stuff/apps/calendar-sync:latest
+          imagePullPolicy: "Always"
+          volumeMounts:
+            - name: secrets
+              mountPath: /data
+              readOnly: true
+          env:
+            - name: CALENDAR_MAGIC_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: calendar-sync-secrets
+                  key: CALENDAR_MAGIC_STRING
+            - name: CALENDAR_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: calendar-sync-secrets
+                  key: CALENDAR_NAME
+            - name: CALENDAR_TIME_ZONE
+              valueFrom:
+                secretKeyRef:
+                  name: calendar-sync-secrets
+                  key: CALENDAR_TIME_ZONE
+            - name: CALENDAR_SUMMARY
+              valueFrom:
+                secretKeyRef:
+                  name: calendar-sync-secrets
+                  key: CALENDAR_SUMMARY
+
+      imagePullSecrets:
+        - name: ghcr.io

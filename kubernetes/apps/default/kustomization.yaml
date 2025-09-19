@@ -6,3 +6,4 @@ namespace: default
 resources:
   - ./ghcr_secret.yaml
   - ./ezshare-sync/ks.yaml
+  - ./calendar-sync/ks.yaml
