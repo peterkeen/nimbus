@@ -21,3 +21,6 @@ spec:
   timeout: 5m
   wait: false
   nameSuffix: -testing
+  postBuild:
+    substitute:
+      hostname: *app

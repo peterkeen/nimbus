@@ -9,8 +9,8 @@ spec:
       namespace: kube-system
       sectionName: websecure
   hostnames:
-    - zwave.nimbus.keen.land
-    - zwave.keen.land
+    - "${hostname}.nimbus.keen.land"
+    - "${hostname}.keen.land"
   rules:
     - matches:
         - path:
